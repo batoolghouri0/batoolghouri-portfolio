@@ -1,0 +1,992 @@
+# PROJECT: BATool GHOURI — PREMIUM INTERACTIVE DEVELOPER PORTFOLIO
+
+Act as an award-winning creative director, senior UI/UX designer, expert frontend developer, and advanced motion designer.
+
+Build an extraordinary, premium, futuristic, highly interactive personal portfolio website for Batool Ghouri.
+
+This is not a basic portfolio template. It should feel like an award-winning digital experience created by a premium creative development agency.
+
+I want visitors to experience something visually impressive from the moment they enter the website until they reach the final contact section.
+
+Every section must have its own distinctive visual identity, meaningful animations, interactive elements, and smooth transitions.
+
+IMPORTANT: Do not make every section look identical. Each section should introduce a fresh visual experience while maintaining one consistent design language.
+
+---
+
+# 1. PERSONAL BRAND IDENTITY
+
+Name: Batool Ghouri
+
+Professional Title: Frontend Developer | AI & Agentic AI Enthusiast
+
+Additional Role: AI Mentor at GIAIC
+
+Experience: Two years of personal learning and hands-on technical experience since 2024. This is not professional employment experience.
+
+Brand Statement:
+
+"Curious Mind. Creative Thinking. Continuous Growth."
+
+Professional Introduction:
+
+"I'm Batool Ghouri, a passionate frontend developer and AI enthusiast with a growing interest in modern web technologies and Artificial Intelligence.
+
+My journey began in 2024, and since then, I've been continuously exploring programming, frontend development, and Agentic AI.
+
+Currently, I'm expanding my technical knowledge through GIAIC, studying in Quarter 4, and serving as an AI Mentor, helping fellow students prepare for their PCAO-F examinations.
+
+I believe in continuous learning, problem-solving, and turning curiosity into technical skills."
+
+---
+
+# 2. GLOBAL VISUAL DESIGN
+
+Create a sophisticated futuristic dark-themed portfolio.
+
+### Color palette
+
+- Main background: #080B16
+- Secondary background: #101629
+- Primary accent: #8B5CF6
+- Secondary accent: #38BDF8
+- Main text: #F8FAFC
+- Muted text: #94A3B8
+
+Use electric violet and cyan gradients with controlled glowing effects.
+
+### Design language
+
+- Premium dark aesthetics.
+- Modern glassmorphism.
+- Subtle neon illumination.
+- Animated gradient borders.
+- Floating visual elements.
+- Sophisticated typography.
+- Layered backgrounds.
+- Dimensional card designs.
+- Elegant section transitions.
+- Beautiful negative space.
+
+Typography:
+- Geist
+- Inter
+- Space Grotesk
+
+Avoid:
+- Generic portfolio templates.
+- Excessive neon effects.
+- Too many floating elements.
+- Unnecessary decorative icons.
+- Repetitive card layouts.
+- Distracting animations.
+
+---
+
+# 3. WEBSITE INTRODUCTION — LOADING EXPERIENCE
+
+Before showing the actual portfolio, create a beautiful full-screen loading experience.
+
+This is a mandatory feature.
+
+### Loading screen concept
+
+The screen should initially display a deep midnight background.
+
+In the center:
+
+- A beautifully animated BG monogram.
+- A subtle glowing circular progress animation.
+- Animated gradient light surrounding the logo.
+- A small text label: "INITIALIZING EXPERIENCE..."
+- A percentage-based loading indicator if genuine loading progress is available.
+
+Once the necessary page resources are ready:
+
+1. Complete the loading animation.
+2. Fade or transform the monogram.
+3. Reveal an animated transition announcing the beginning of the portfolio.
+4. Transition smoothly into the hero section.
+
+### Portfolio opening transition
+
+Create a cinematic entrance animation.
+
+Possible effects:
+- A vertical split-screen reveal.
+- A glowing light sweep across the screen.
+- Animated geometric shapes moving away.
+- A smooth curtain-like reveal.
+- A subtle zoom-out transition.
+
+Make the visitor feel that the actual portfolio experience is beginning.
+
+Do not use an artificial loading delay. The loading experience should remain brief and wait for actual page readiness.
+
+Ensure returning visitors are not forced through unnecessarily long loading animations.
+
+---
+
+# 4. HERO SECTION — THE FIRST IMPRESSION
+
+This is the most important section of the website.
+
+It must immediately communicate identity, personality, and technical interests.
+
+### Content
+
+Small introductory text:
+
+"HELLO, WORLD! I'M"
+
+Main heading:
+
+"Batool Ghouri"
+
+Professional title:
+
+"Frontend Developer & AI Enthusiast."
+
+Supporting description:
+
+"Exploring the intersection of modern web development and intelligent technologies. Learning, building, and evolving with every line of code."
+
+Role highlight:
+
+"AI Mentor @ GIAIC"
+
+### Text animation requirements
+
+I specifically want typing-style animations.
+
+Implement:
+- Animated typing effect for the professional title.
+- A blinking cursor.
+- Supporting description appearing through a smooth typewriter or staggered text reveal.
+- Name appearing with an elegant character-by-character animation.
+- Subtle text glow or gradient movement.
+
+Typing should look professional, not like an old-fashioned terminal.
+
+Do not make every text element type endlessly. Use a tasteful one-time entrance animation or controlled rotation.
+
+### Hero visual
+
+Create a visually impressive futuristic composition.
+
+Include:
+- Animated gradient mesh background.
+- Abstract 3D-inspired orb.
+- Floating technology symbols.
+- Glowing orbital rings.
+- Subtle particle effects.
+- Floating glassmorphism elements.
+- Mouse-responsive parallax.
+- Depth and perspective effects.
+
+Avoid generic stock photos.
+
+If no profile picture is provided, use a creative BG monogram or abstract digital visual.
+
+### CTA BUTTONS
+
+Primary CTA:
+"Explore My Journey"
+
+Secondary CTA:
+"Let's Connect"
+
+Both buttons must look extraordinary.
+
+Implement:
+- Animated gradient borders.
+- Glowing hover states.
+- Magnetic hover movement (desktop).
+- Smooth background transitions.
+- Subtle scale and elevation effects.
+- Animated arrow icons.
+- Elegant click feedback.
+
+Create a distinctive visual difference between the two buttons.
+
+---
+
+# 5. NAVIGATION
+
+Create a premium sticky navigation bar.
+
+Items:
+- Home
+- About
+- Skills
+- Journey
+- Mentorship
+- Approach
+- Education
+- Contact
+
+Requirements:
+- Transparent background initially.
+- Glassmorphism background on scroll.
+- Animated active-section indicator.
+- Smooth scrolling.
+- Elegant hover effects.
+- Mobile navigation with a sophisticated animated menu.
+- BG monogram logo.
+
+Add a subtle scroll-progress indicator at the top of the website.
+
+---
+
+# 6. ABOUT ME — PERSONAL IDENTITY EXPERIENCE
+
+Section heading:
+
+"Beyond The Code."
+
+Subheading:
+
+"Curiosity brought me here. Continuous learning keeps me moving."
+
+Content:
+
+"I'm Batool Ghouri, a Computer Science student and aspiring technology professional.
+
+My journey started in 2024 through GIAIC (Governor's Initiative for AI and Computing), where I began exploring programming and modern technologies.
+
+Over the past two years, I've developed my understanding of frontend development, programming, and Artificial Intelligence.
+
+Currently, I'm in Quarter 4 of my learning journey. Alongside my studies, I've taken on the role of an AI Mentor, helping fellow students understand concepts and prepare for their PCAO-F examinations.
+
+For me, technology is more than writing code. It's about curiosity, creativity, problem-solving, and never stopping the learning process."
+
+### PERSONAL IDENTITY CARD — IMPORTANT INTERACTION
+
+Create a distinctive interactive personal identity card.
+
+Default state:
+- Display BG monogram.
+- Display Batool Ghouri.
+- Display Frontend Developer & AI Enthusiast.
+- Add subtle animated gradient borders.
+- Use a premium glass effect.
+
+On hover:
+- The card should smoothly expand or transform.
+- Reveal my actual profile photograph.
+- Animate the photograph with a subtle zoom-in effect.
+- Add a soft glowing frame.
+- Reveal additional identity details.
+- Use a smooth image transition.
+
+The image should be configurable through an asset placeholder.
+
+If my photograph is not uploaded, display the BG monogram instead. Never generate a fake personal photograph.
+
+On mobile, implement tap-to-reveal functionality because hover is unavailable.
+
+---
+
+# 7. TECHNICAL SKILLS — INTERACTIVE ANIMATED CARDS
+
+Section heading:
+
+"My Technical Universe."
+
+Subheading:
+
+"Technologies I'm learning, exploring, and working with."
+
+### Skills
+
+Frontend Development:
+- HTML
+- CSS
+- TypeScript
+- Next.js
+- Tailwind CSS
+
+Programming:
+- Python
+
+Artificial Intelligence:
+- Agentic AI
+
+### CARD DESIGN — VERY IMPORTANT
+
+Do not use ordinary static rectangular skill cards.
+
+Create visually distinctive, modern animated technology cards.
+
+Each card should contain:
+
+1. Proper technology icon or logo.
+2. Technology name.
+3. One-line description.
+4. A subtle category label.
+
+Example descriptions:
+
+HTML — "Building the structure of modern web experiences."
+
+CSS — "Creating beautiful and responsive visual interfaces."
+
+TypeScript — "Writing structured and type-safe JavaScript."
+
+Next.js — "Exploring modern React-based web development."
+
+Tailwind CSS — "Designing responsive interfaces with utility-first styling."
+
+Python — "Developing programming logic and exploring AI technologies."
+
+Agentic AI — "Exploring intelligent agents and autonomous AI workflows."
+
+### Advanced card animations
+
+Implement:
+
+- Animated glowing border continuously revolving around the card.
+- Gradient border illumination.
+- Subtle 3D tilt on mouse movement.
+- Card elevation on hover.
+- Animated icon movement.
+- Smooth description reveal.
+- Soft radial glow following the cursor.
+- Scroll-triggered staggered entrance.
+- Different subtle accent gradients for different technology categories.
+
+The revolving border should look like a moving light traveling around the edges, not a distracting flashing outline.
+
+Use proper technology logos wherever possible. Use consistent icon assets rather than unrelated generic icons.
+
+On mobile, replace hover-dependent effects with touch-friendly interactions.
+
+Do not invent proficiency percentages or claim expert-level abilities.
+
+---
+
+# 8. LEARNING JOURNEY — ALTERNATING VERTICAL TIMELINE
+
+Section heading:
+
+"Every Milestone Has a Story."
+
+Subheading:
+
+"From being a curious learner to becoming a mentor."
+
+This should be one of the strongest visual sections.
+
+### Timeline layout
+
+Create a vertical alternating timeline.
+
+The timeline should run through the center of the section.
+
+Alternate the milestone cards:
+
+- First milestone on the LEFT.
+- Second milestone on the RIGHT.
+- Third milestone on the LEFT.
+- Fourth milestone on the RIGHT.
+- Continue alternating.
+
+Each milestone should be connected to the central timeline with animated connecting lines.
+
+### Scroll animation
+
+As the visitor scrolls:
+
+1. The central timeline line gradually illuminates.
+2. Milestone indicators activate.
+3. Corresponding cards slide into view.
+4. Card content reveals with staggered animation.
+5. Completed milestones receive a subtle glowing accent.
+
+### Actual timeline content
+
+2024 — THE BEGINNING
+
+"Selected among 50,000 qualified students from over 5 million students.
+
+My learning journey began at Governor House Sindh IT Marquee, where I studied HTML and CSS as prerequisites."
+
+QUARTER 01 — TYPESCRIPT
+
+"Explored TypeScript, strengthened my programming fundamentals, and successfully cleared the quarter examination."
+
+QUARTER 02 — FRONTEND DEVELOPMENT
+
+"Learned Next.js and Tailwind CSS, expanding my understanding of modern frontend development. Successfully cleared the quarter examination."
+
+QUARTER 03 — PYTHON & AGENTIC AI
+
+"Entered the world of Python and Agentic AI, explored intelligent technologies, and successfully cleared the quarter examination."
+
+QUARTER 04 — AI MENTOR
+
+"Successfully cleared the PCAO-F examination and earned the opportunity to become an AI Mentor.
+
+Now helping fellow students understand concepts, prepare for examinations, and progress in their learning journey."
+
+NEXT MILESTONE — CCAO-F
+
+"Preparing for my next academic milestone: successfully clearing the CCAO-F examination."
+
+### Visual treatment
+
+- Completed milestones: illuminated indicators.
+- Current milestone: prominent animated violet/cyan glow.
+- Upcoming milestone: subtle outlined indicator.
+- Alternating glassmorphism cards.
+- Animated timeline progress.
+- Smooth card reveal.
+- Subtle background visual effects.
+
+On mobile, transform the timeline into a clean single-sided vertical timeline. Do not force the alternating desktop layout onto small screens.
+
+---
+
+# 9. MENTORSHIP — INSPIRATIONAL FEATURE SECTION
+
+Section heading:
+
+"From Learning to Leading."
+
+Subheading:
+
+"Growth becomes more meaningful when you help others grow."
+
+This section must feel emotionally inspiring, memorable, and visually powerful.
+
+I want this section to communicate that becoming a mentor is an important milestone in my technical journey.
+
+### Content
+
+"Learning has always been an important part of my journey. But one of the most meaningful milestones was getting the opportunity to share what I've learned with others.
+
+After successfully clearing my PCAO-F examination at GIAIC, I became an AI Mentor.
+
+Today, I'm helping fellow students understand concepts, prepare for their examinations, and approach their learning journey with greater confidence.
+
+For me, mentorship is not simply about teaching. It's about sharing knowledge, encouraging progress, and growing together.
+
+Because sometimes, the best way to understand something is to help someone else learn it."
+
+### Highlight card
+
+AI MENTOR — GIAIC
+
+PCAO-F — SUCCESSFULLY CLEARED
+
+CURRENT ROLE — GUIDING STUDENTS
+
+### Visual direction
+
+Create a premium, inspiring, cinematic composition.
+
+Possible elements:
+- Large expressive typography.
+- Animated glowing achievement card.
+- Elegant spotlight effect.
+- Abstract network connections.
+- Floating light particles.
+- Animated connecting nodes.
+- Subtle educational and technology-inspired graphics.
+- Layered glassmorphism.
+- Beautiful background gradient transitions.
+
+### Animation direction
+
+- Headline reveal with staggered word animation.
+- Achievement card enters with a cinematic scale transition.
+- Background network nodes gently animate.
+- Glowing connecting lines appear progressively.
+- Hover effect on achievement details.
+- Scroll-triggered visual transformation.
+
+This section should communicate leadership, responsibility, growth, and knowledge sharing.
+
+Do not invent student counts, success rates, testimonials, or mentorship results.
+
+---
+
+# 10. PROBLEM-SOLVING APPROACH — INTERACTIVE VERTICAL PROCESS
+
+Section heading:
+
+"How I Turn Problems Into Solutions."
+
+Supporting text:
+
+"Every challenge has a solution. The key is understanding the problem before rushing towards an answer."
+
+Display the six steps as a vertically numbered process.
+
+### Steps
+
+01 — STAY CALM
+
+"Approach the challenge with a positive mindset and confidence that it can be solved."
+
+02 — UNDERSTAND
+
+"Identify the actual problem and understand what is causing it."
+
+03 — BREAK IT DOWN
+
+"Divide complex problems into smaller, manageable steps."
+
+04 — RESEARCH
+
+"Explore possible solutions, investigate different approaches, and find the most suitable one."
+
+05 — IMPLEMENT & TEST
+
+"Apply the selected solution and test whether it works as expected."
+
+06 — LEARN & IMPROVE
+
+"Learn from mistakes, identify improvements, and refine the solution."
+
+### Visual design
+
+Create a premium vertical numbered timeline.
+
+Each step should have:
+- Large expressive number.
+- Clear heading.
+- Short explanation.
+- Unique visual icon.
+- Animated connecting line.
+
+### Scroll and hover interactions
+
+- The connecting line progressively illuminates while scrolling.
+- Current step receives an active glow.
+- Step numbers animate into view.
+- Content appears through staggered reveal.
+- Hovering over a step expands its visual details.
+- Subtle card elevation and border illumination.
+- Smooth transitions between active states.
+
+The overall visual should communicate a systematic and thoughtful approach to solving problems.
+
+This section should build trust with visitors and potential clients by showing how I approach challenges.
+
+Do not claim professional client experience.
+
+---
+
+# 11. EDUCATION — CLEAN INTERACTIVE CARDS
+
+Section heading:
+
+"Academic Foundations."
+
+Create two beautiful, minimal education cards.
+
+CARD 01
+
+Intermediate — Computer Science
+
+2026 – Present
+
+First Year Student.
+
+Currently pursuing Intermediate education in Computer Science.
+
+CARD 02
+
+Matriculation — Computer Science
+
+2025 – 2026
+
+The Best Future Grammar School.
+
+Successfully completed matriculation in Computer Science.
+
+### Technical learning card
+
+GIAIC — Governor's Initiative for AI and Computing.
+
+Currently studying in Quarter 4.
+
+PCAO-F examination successfully cleared.
+
+Current Role: AI Mentor.
+
+Next Goal: CCAO-F.
+
+### Design
+
+- Clean glassmorphism cards.
+- Elegant education icons.
+- Animated glowing borders on hover.
+- Smooth card elevation.
+- Subtle entrance animations.
+- Attractive date labels.
+- Excellent typography.
+
+Keep this section simpler than the timeline and mentorship sections.
+
+---
+
+# 12. RESUME — INTERACTIVE RESUME EXPERIENCE
+
+Add a prominent Resume button in the navigation or hero area.
+
+Label:
+
+"View Resume"
+
+When clicked, do not immediately navigate away from the portfolio.
+
+Instead, open a beautiful modal or large overlay within the website.
+
+### Resume modal requirements
+
+- Premium glassmorphism container.
+- Smooth scale-and-fade entrance.
+- Dark background.
+- Close button.
+- Resume document preview.
+- Scrollable document viewer.
+- Download Resume button.
+- Optional open-in-new-tab action.
+
+The resume should be displayed as an actual PDF using an embedded PDF viewer or browser-supported document preview.
+
+### Download functionality
+
+When visitors click "Download Resume":
+
+- Download the actual uploaded resume PDF.
+- Use a professional filename such as Batool_Ghouri_Resume.pdf.
+- Do not generate a fake or empty resume file.
+- If the PDF has not yet been uploaded, show a clearly labeled setup placeholder and do not present a broken download.
+
+Make the resume asset easy to replace later without rewriting the component.
+
+The modal must work on desktop and mobile.
+
+---
+
+# 13. CONTACT — SOCIAL CONNECTIONS + PREMIUM FORM
+
+Section heading:
+
+"Let's Build Connections."
+
+Supporting text:
+
+"I'm always excited to connect with fellow developers, technology enthusiasts, learners, and people who believe in continuous growth.
+
+Have an opportunity, an idea, or simply want to connect? Feel free to reach out."
+
+### SOCIAL MEDIA ICONS
+
+Create a visually attractive social connection area.
+
+Include:
+
+- WhatsApp
+- Facebook
+- Instagram
+- LinkedIn
+- X (Twitter)
+- Threads
+
+Each social platform should have:
+- Its proper official icon.
+- Platform name.
+- Attractive hover animation.
+- Subtle glowing border.
+- Smooth icon transformation.
+- Appropriate brand-inspired accent color.
+
+When clicked, each icon must open the correct configured social profile in a new browser tab.
+
+Use configurable URL placeholders for all accounts.
+
+Do not fabricate social URLs. If a URL is missing, do not make its icon behave like a working link. Clearly indicate that the profile link still needs configuration.
+
+### CONTACT FORM — VERY IMPORTANT
+
+Create an exceptionally beautiful, eye-catching, user-friendly contact form.
+
+Fields:
+
+1. Full Name
+2. Email Address
+3. Subject
+4. Message
+
+Button:
+
+"Send Message"
+
+### Form visual experience
+
+- Beautiful glassmorphism panel.
+- Animated glowing border.
+- Smooth input focus effects.
+- Animated labels or placeholders.
+- Elegant focus rings.
+- Proper input validation.
+- Character counter for the message.
+- Animated send button.
+- Loading state while submitting.
+- Success animation after confirmed submission.
+- Clear error state if submission fails.
+
+### ACTUAL EMAIL FUNCTIONALITY — MANDATORY
+
+I want messages submitted through this contact form to reach my personal email address.
+
+This must be real working functionality, not a frontend-only demo.
+
+Implement a secure email integration using an appropriate backend or serverless email service, preferably Resend.
+
+Requirements:
+
+1. Use a secure server-side API endpoint or supported backend function.
+2. Store email API credentials in environment secrets.
+3. Never expose API keys in frontend code.
+4. Send the visitor's submitted message to my configured email address.
+5. Include the visitor's name, email, subject, and message in the email.
+6. Validate and sanitize submitted data.
+7. Implement basic anti-spam protection and rate limiting where supported.
+8. Use the visitor's email as reply-to where appropriate.
+9. Show success only after the email service confirms successful delivery acceptance.
+10. Display a useful error message if sending fails.
+
+My recipient email address will be configured later.
+
+Create a clear setup point for:
+- RESEND_API_KEY
+- CONTACT_EMAIL
+
+If external integration requires account authorization, domain verification, or configuration, explain the exact setup steps.
+
+Do not pretend email functionality is active until the integration has been configured and tested successfully.
+
+---
+
+# 14. GLOBAL ANIMATION SYSTEM
+
+Animations are one of the most important aspects of this portfolio.
+
+Use Framer Motion / Motion for React and CSS animations appropriately.
+
+Implement a consistent motion system across the website.
+
+### A. Page and section transitions
+
+- Loading screen entrance and exit.
+- Cinematic hero reveal.
+- Scroll-triggered section entrances.
+- Staggered text animations.
+- Smooth section transitions.
+- Animated background changes where appropriate.
+
+### B. Text animations
+
+- Character-by-character name reveal.
+- Typing animation for professional title.
+- Staggered supporting text.
+- Animated section headings.
+- Elegant word reveal.
+- Blinking cursor effect.
+
+### C. Border animations
+
+- Continuously revolving glowing border effects.
+- Animated gradient strokes.
+- Subtle neon illumination.
+- Hover-activated border highlights.
+
+### D. Hover animations
+
+- Magnetic CTA buttons.
+- 3D card tilt.
+- Icon transformations.
+- Smooth card elevation.
+- Animated arrows.
+- Image zoom.
+- Radial cursor-following glow.
+
+### E. Scroll animations
+
+- Staggered reveal.
+- Timeline progression.
+- Numbered step activation.
+- Card entrance.
+- Parallax backgrounds.
+- Subtle image transformations.
+
+### IMPORTANT ANIMATION QUALITY RULES
+
+- Animations must be smooth and intentional.
+- Avoid repetitive effects across every section.
+- Avoid excessive continuous movement.
+- Avoid performance-heavy implementations.
+- Use transform and opacity animations wherever possible.
+- Prefer Intersection Observer or efficient motion viewport triggers.
+- Respect prefers-reduced-motion.
+- Provide touch-friendly mobile interactions.
+- Avoid custom cursors on touch devices.
+- Never sacrifice readability for animation.
+
+---
+
+# 15. TECHNICAL IMPLEMENTATION
+
+Preferred stack:
+
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion / Motion for React
+- Lucide React
+- Appropriate technology brand icons
+- Resend or another suitable secure email integration
+
+Use Lovable's supported project architecture and backend integration capabilities.
+
+### Code quality
+
+- Reusable components.
+- Clean folder structure.
+- Well-organized styling.
+- Semantic HTML.
+- Accessible interactive elements.
+- Maintainable animation components.
+- Proper error handling.
+- Optimized rendering.
+- Responsive layouts.
+- No unnecessary dependencies.
+
+### Recommended component structure
+
+- LoadingScreen
+- PortfolioIntroTransition
+- Navbar
+- HeroSection
+- AnimatedIdentityCard
+- AboutSection
+- SkillsSection
+- SkillCard
+- LearningTimeline
+- MentorshipSection
+- ProblemSolvingSection
+- EducationSection
+- ResumeModal
+- ContactSection
+- SocialLinks
+- ContactForm
+- Footer
+- ScrollProgress
+- BackToTop
+
+---
+
+# 16. RESPONSIVE DESIGN
+
+The website must look exceptional across:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+Desktop:
+- Rich compositions.
+- Spacious layouts.
+- Interactive hover effects.
+- Sophisticated animations.
+
+Tablet:
+- Balanced layouts.
+- Appropriate spacing.
+- Adapted card layouts.
+
+Mobile:
+- Smooth animated navigation.
+- Properly stacked sections.
+- Touch-friendly interactions.
+- Single-sided vertical timeline.
+- Optimized image sizes.
+- No horizontal overflow.
+- Lightweight animations.
+- Accessible modal and form.
+
+Do not simply shrink the desktop layout. Design the mobile experience intentionally.
+
+---
+
+# 17. SEO, PERFORMANCE & ACCESSIBILITY
+
+Implement:
+
+- Professional page title.
+- SEO description.
+- Open Graph metadata.
+- Custom BG monogram favicon.
+- Proper heading hierarchy.
+- Image alt text.
+- Keyboard-accessible navigation.
+- Visible focus states.
+- Reduced-motion support.
+- Optimized image loading.
+- Lazy loading where appropriate.
+- No unnecessary large animation libraries.
+- Good Core Web Vitals.
+
+---
+
+# 18. CONTENT ACCURACY & HONESTY
+
+These instructions are mandatory.
+
+- Do not invent professional employment experience.
+- Do not invent completed client projects.
+- Do not create fake testimonials.
+- Do not fabricate certifications.
+- Do not invent student counts or pass rates.
+- Do not create fake social media links.
+- Do not invent GitHub repositories.
+- Do not invent profile pictures.
+- Do not invent proficiency percentages.
+- Do not portray CCAO-F as completed.
+- Do not add empty Projects or Practice & Experiments sections.
+- Distinguish personal learning from professional employment.
+
+Use the supplied information faithfully.
+
+---
+
+# 19. FINAL CREATIVE DIRECTION
+
+The final portfolio must communicate:
+
+1. A genuine two-year technical learning journey.
+2. A growing foundation in frontend development.
+3. Interest and exploration in AI and Agentic AI.
+4. A meaningful transition from student to AI Mentor.
+5. A thoughtful approach to solving problems.
+6. Ambition, curiosity, and continuous growth.
+
+The entire experience should feel premium, immersive, modern, memorable, and professionally designed.
+
+I want visitors to be impressed by the quality of the website itself while also understanding my personality and technical journey.
+
+Do not create a basic static portfolio.
+
+Do not deliver only a homepage mockup.
+
+Build the complete responsive, interactive website with all specified sections, animations, modal interactions, and functional integrations.
+
+Make thoughtful design decisions independently and prioritize exceptional execution.
+
+**THE FINAL EXPERIENCE SHOULD FEEL LIKE A PREMIUM DIGITAL IDENTITY, NOT JUST A COLLECTION OF WEB PAGES.**
