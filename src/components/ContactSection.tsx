@@ -379,7 +379,9 @@ export const ContactSection: React.FC = () => {
                 <span className="text-[#38BDF8] font-mono">{backendConfig.recipient}</span>
               </div>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                {backendConfig.status === 'unreachable' && backendConfig.detail
+                {(backendConfig.status === 'unreachable' ||
+                  backendConfig.status === 'not_configured') &&
+                backendConfig.detail
                   ? backendConfig.detail
                   : 'Form submissions are processed securely via our server-side email API and delivered directly to the recipient inbox.'}
               </p>
