@@ -16,6 +16,7 @@ app.use(express.json({ limit: '1mb' }));
 
 // Health and status endpoint for email integration
 app.get('/api/contact/status', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const isResendConfigured = Boolean(apiKey && apiKey !== 're_123456789' && !apiKey.includes('YOUR_'));
   const recipientEmail = process.env.CONTACT_EMAIL || 'batoolghouri000@gmail.com';

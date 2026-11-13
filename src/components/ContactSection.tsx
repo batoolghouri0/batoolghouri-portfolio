@@ -93,26 +93,60 @@ export const ContactSection: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
   const [backendConfig, setBackendConfig] = useState<{
-    configured: boolean | null;
+    status: 'loading' | 'active' | 'not_configured' | 'unreachable';
     recipient: string;
+    detail?: string;
   }>({
-    configured: null,
+    status: 'loading',
     recipient: 'batoolghouri000@gmail.com',
   });
   const [unconfiguredNotice, setUnconfiguredNotice] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch('/api/contact/status')
-      .then((res) => res.json())
-      .then((data) => {
-        setBackendConfig({
-          configured: Boolean(data.configured),
-          recipient: data.recipient || 'batoolghouri000@gmail.com',
-        });
-      })
-      .catch(() => {
-        setBackendConfig((prev) => ({ ...prev, configured: false }));
+  const checkBackendStatus = async (attempt = 0) => {
+    try {
+      const res = await fetch('/api/contact/status', {
+        cache: 'no-store',
+        credentials: 'same-origin',
       });
+      const contentType = res.headers.get('content-type') || '';
+
+      if (!res.ok || !contentType.includes('application/json')) {
+        if (attempt < 2) {
+          setTimeout(() => checkBackendStatus(attempt + 1), 1200);
+          return;
+        }
+        setBackendConfig((prev) => ({
+          ...prev,
+          status: 'unreachable',
+          detail:
+            res.status === 404
+              ? 'Email API route not found on this deployment URL (re-share/deploy the full-stack app or use the Dev Preview).'
+              : 'Unable to verify API status (check browser third-party cookie settings or reload).',
+        }));
+        return;
+      }
+
+      const data = await res.json();
+      setBackendConfig({
+        status: data.configured ? 'active' : 'not_configured',
+        recipient: data.recipient || 'batoolghouri000@gmail.com',
+        detail: data.message,
+      });
+    } catch {
+      if (attempt < 2) {
+        setTimeout(() => checkBackendStatus(attempt + 1), 1200);
+        return;
+      }
+      setBackendConfig((prev) => ({
+        ...prev,
+        status: 'unreachable',
+        detail: 'Could not reach the backend email server. Please reload or retry.',
+      }));
+    }
+  };
+
+  useEffect(() => {
+    checkBackendStatus();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -311,16 +345,33 @@ export const ContactSection: React.FC = () => {
                   <ShieldCheck className="w-4 h-4 text-[#8B5CF6]" />
                   <span>DIRECT INBOX FORWARDING</span>
                 </div>
-                {backendConfig.configured === true && (
+                {backendConfig.status === 'loading' && (
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/10 text-[#94A3B8] border border-white/15">
+                    Checking...
+                  </span>
+                )}
+                {backendConfig.status === 'active' && (
                   <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Active
                   </span>
                 )}
-                {backendConfig.configured === false && (
+                {backendConfig.status === 'not_configured' && (
                   <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/15 text-rose-300 border border-rose-500/30">
                     Not Configured
                   </span>
+                )}
+                {backendConfig.status === 'unreachable' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setBackendConfig((prev) => ({ ...prev, status: 'loading' }));
+                      checkBackendStatus();
+                    }}
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25 transition-colors cursor-pointer"
+                  >
+                    Retry Check
+                  </button>
                 )}
               </div>
               <div className="text-sm font-semibold text-[#F8FAFC] mb-1 break-all">
@@ -328,7 +379,9 @@ export const ContactSection: React.FC = () => {
                 <span className="text-[#38BDF8] font-mono">{backendConfig.recipient}</span>
               </div>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                Form submissions are processed securely via our server-side email API and delivered directly to the recipient inbox.
+                {backendConfig.status === 'unreachable' && backendConfig.detail
+                  ? backendConfig.detail
+                  : 'Form submissions are processed securely via our server-side email API and delivered directly to the recipient inbox.'}
               </p>
             </div>
           </ScrollReveal>
