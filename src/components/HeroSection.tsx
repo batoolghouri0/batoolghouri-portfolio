@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Sparkles, Send, FileText, Bot } from 'lucide-react';
 import { BgMonogram, TypeScriptIcon, NextJsIcon, PythonIcon, AgenticAiIcon } from './Icons';
-import { useLanguage } from '../context/LanguageContext';
+import { useViewportTier } from '../hooks/useViewportTier';
 
 interface HeroSectionProps {
   onOpenResume: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
-  const { t, isUrdu } = useLanguage();
+const INITIAL_FULL_TITLE = 'Frontend Developer & AI Enthusiast.';
+const CYCLING_TITLES = ['Frontend Developer', 'AI Enthusiast', 'AI Mentor @ GIAIC'];
 
-  const initialFullTitle = t('hero.title_initial');
-  const cyclingTitles = isUrdu
-    ? ['فرنٹ اینڈ ڈویلپر', 'اے آئی کی دلدادہ', 'اے آئی مینٹر @ GIAIC']
-    : ['Frontend Developer', 'AI Enthusiast', 'AI Mentor @ GIAIC'];
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { parallaxRange, isPhone, prefersReducedMotion } = useViewportTier();
 
   const [displayedTitle, setDisplayedTitle] = useState('');
   const [isTypingDone, setIsTypingDone] = useState(false);
@@ -22,11 +21,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
   // Mouse parallax state for 3D gyro orb
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Responsive scroll-driven parallax for phone, tablet, laptop, desktop
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const textParallaxY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : parallaxRange * 0.55]
+  );
+  const orbParallaxY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : -parallaxRange * 0.85]
+  );
+  const bgGlowY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : parallaxRange * 1.3]
+  );
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, isPhone ? 0.85 : 0.35]);
+  const orbScale = useTransform(scrollYProgress, [0, 1], [1, isPhone ? 0.96 : 0.88]);
+
   useEffect(() => {
     let isCancelled = false;
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
-    // Reset when language toggles
     setDisplayedTitle('');
     setIsTypingDone(false);
 
@@ -34,13 +56,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
     let charIndex = 0;
     const typeInitial = () => {
       if (isCancelled) return;
-      if (charIndex <= initialFullTitle.length) {
-        setDisplayedTitle(initialFullTitle.slice(0, charIndex));
+      if (charIndex <= INITIAL_FULL_TITLE.length) {
+        setDisplayedTitle(INITIAL_FULL_TITLE.slice(0, charIndex));
         charIndex++;
         timer = setTimeout(typeInitial, 45);
       } else {
         setIsTypingDone(true);
-        // Pause before starting the gentle cycle
         timer = setTimeout(startCycling, 2200);
       }
     };
@@ -66,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
 
     const typeNextTitle = () => {
       if (isCancelled) return;
-      const targetText = cyclingTitles[cycleIdx % cyclingTitles.length];
+      const targetText = CYCLING_TITLES[cycleIdx % CYCLING_TITLES.length];
       let len = 0;
 
       const typeChars = () => {
@@ -76,7 +97,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
           len++;
           timer = setTimeout(typeChars, 50);
         } else {
-          // Pause on completed title
           cycleIdx++;
           timer = setTimeout(eraseTitle, 2400);
         }
@@ -91,9 +111,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
       isCancelled = true;
       clearTimeout(timer);
     };
-  }, [initialFullTitle, isUrdu]);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isPhone) return;
     const { clientX, clientY, currentTarget } = e;
     const { width, height, left, top } = currentTarget.getBoundingClientRect();
     const x = (clientX - left) / width - 0.5;
@@ -108,21 +129,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
     }
   };
 
-  const displayName = isUrdu ? 'بتول غوری' : 'Batool Ghouri';
+  const displayName = 'Batool Ghouri';
   const nameLetters = displayName.split('');
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       onMouseMove={handleMouseMove}
       className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
-      {/* Background Gradient Mesh & Deep Glows */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Background Gradient Mesh & Deep Glows with Scroll Parallax */}
+      <motion.div
+        style={{ y: bgGlowY }}
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+      >
         <div className="absolute -top-[15%] -left-[10%] w-[600px] h-[600px] rounded-full bg-[#8B5CF6]/12 blur-[130px]" />
         <div className="absolute top-[20%] -right-[10%] w-[550px] h-[550px] rounded-full bg-[#38BDF8]/10 blur-[140px]" />
         <div className="absolute -bottom-[20%] left-[25%] w-[700px] h-[400px] rounded-full bg-[#6366F1]/08 blur-[150px]" />
-        
+
         {/* Subtle geometric grid background */}
         <div
           className="absolute inset-0 opacity-[0.035]"
@@ -131,14 +156,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
             backgroundSize: '48px 48px',
           }}
         />
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
           {/* Left Column: Typographic Hierarchy & CTAs (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left rtl:text-right">
-            
+          <motion.div
+            style={{ y: textParallaxY, opacity: heroOpacity }}
+            className="lg:col-span-7 flex flex-col items-start text-left"
+          >
             {/* Introductory Micro-Kicker & Role Highlight */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -148,12 +174,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
             >
               <span className="text-xs font-mono font-semibold tracking-[0.2em] text-[#38BDF8] uppercase flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                {t('hero.kicker')}
+                HELLO, WORLD! I&apos;M
               </span>
               <span className="text-slate-600">·</span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
                 <Bot className="w-3.5 h-3.5 text-[#38BDF8]" />
-                {t('hero.badge')}
+                AI Mentor @ GIAIC
               </span>
             </motion.div>
 
@@ -169,7 +195,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                     delay: 0.15 + index * 0.035,
                     ease: 'easeOut',
                   }}
-                  className={char === ' ' ? 'inline-block w-3 sm:w-4' : 'inline-block transition-colors hover:text-[#38BDF8]'}
+                  className={
+                    char === ' '
+                      ? 'inline-block w-3 sm:w-4'
+                      : 'inline-block transition-colors hover:text-[#38BDF8]'
+                  }
                 >
                   {char}
                 </motion.span>
@@ -195,7 +225,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-xl mb-8"
             >
-              {t('hero.desc')}
+              Exploring the intersection of modern web development and intelligent technologies. Learning, building, and evolving with every line of code.
             </motion.p>
 
             {/* Brand Statement Capsule */}
@@ -207,7 +237,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shadow-[0_0_8px_#8B5CF6]" />
               <span className="italic font-mono text-[#C4B5FD]">
-                {t('hero.statement')}
+                &quot;Curious Mind. Creative Thinking. Continuous Growth.&quot;
               </span>
             </motion.div>
 
@@ -226,8 +256,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                 {/* Rotating Gradient Outline */}
                 <span className="absolute inset-0 rounded-xl p-[1.5px] bg-gradient-to-r from-[#8B5CF6] via-[#38BDF8] to-[#8B5CF6] bg-[length:200%_auto] animate-border-rotate" />
                 <span className="relative z-10 flex items-center gap-2.5 px-5 py-2.5 rounded-[10px] bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] group-hover:from-[#7C3AED] group-hover:to-[#2563EB] transition-all">
-                  <span>{t('hero.cta_primary')}</span>
-                  <ArrowRight className="w-4 h-4 text-[#38BDF8] group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
+                  <span>Explore My Journey</span>
+                  <ArrowRight className="w-4 h-4 text-[#38BDF8] group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
 
@@ -237,7 +267,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                 className="group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm text-[#F8FAFC] bg-[#101629]/90 hover:bg-[#151D36] border border-white/10 hover:border-[#38BDF8]/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-pointer"
               >
                 <Send className="w-4 h-4 text-[#38BDF8] group-hover:rotate-12 transition-transform" />
-                <span>{t('hero.cta_secondary')}</span>
+                <span>Let&apos;s Connect</span>
               </button>
 
               {/* Tertiary Action: View Resume */}
@@ -246,19 +276,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                 className="inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#94A3B8] hover:text-[#F8FAFC] transition-colors cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                <span>{t('hero.cta_resume')}</span>
+                <span>Resume (PDF)</span>
               </button>
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Futuristic 3D-Inspired Gyro Composition (5 Cols) */}
-          <div className="lg:col-span-5 flex justify-center items-center relative">
+          {/* Right Column: Futuristic 3D-Inspired Gyro Composition (5 Cols) with Scroll Depth */}
+          <motion.div
+            style={{ y: orbParallaxY, scale: orbScale, opacity: heroOpacity }}
+            className="lg:col-span-5 flex justify-center items-center relative"
+          >
             <motion.div
               style={{
-                transform: `perspective(1000px) rotateY(${mousePos.x * 24}deg) rotateX(${-mousePos.y * 24}deg)`,
+                transform: isPhone
+                  ? undefined
+                  : `perspective(1000px) rotateY(${mousePos.x * 24}deg) rotateX(${-mousePos.y * 24}deg)`,
                 transition: 'transform 0.15s ease-out',
               }}
-              className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] flex items-center justify-center"
+              className="relative w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] lg:w-[380px] lg:h-[380px] flex items-center justify-center"
             >
               {/* Outer Glowing Orbital Ring 1 */}
               <div className="absolute inset-0 rounded-full border border-[#8B5CF6]/30 animate-spin" style={{ animationDuration: '32s' }}>
@@ -276,7 +311,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               {/* Central Abstract Glowing Core Container */}
               <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl bg-gradient-to-br from-[#101629]/95 via-[#0C1224]/90 to-[#080B16] border border-white/10 shadow-[0_0_60px_rgba(139,92,246,0.35)] backdrop-blur-2xl flex flex-col items-center justify-center p-6 group">
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#8B5CF6]/20 to-[#38BDF8]/20 opacity-40 group-hover:opacity-70 transition-opacity" />
-                
+
                 {/* Center Monogram */}
                 <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
                   <BgMonogram size={78} />
@@ -284,21 +319,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
 
                 <div className="relative z-10 mt-3 text-center">
                   <span className="text-[10px] font-mono tracking-widest text-[#94A3B8] uppercase block">
-                    {t('hero.foundation')}
+                    FOUNDATION
                   </span>
                   <span className="text-xs font-semibold text-[#F8FAFC]">
-                    {t('hero.quarter')}
+                    GIAIC Quarter 4
                   </span>
                 </div>
               </div>
 
               {/* Orbiting Tech Node 1: TypeScript */}
               <motion.div
-                animate={{
-                  y: [0, -8, 0],
-                }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 left-8 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="absolute -top-3 left-6 sm:left-8 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
               >
                 <TypeScriptIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">TypeScript</span>
@@ -306,11 +339,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
 
               {/* Orbiting Tech Node 2: Next.js */}
               <motion.div
-                animate={{
-                  y: [0, 9, 0],
-                }}
+                animate={{ y: [0, 9, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute top-12 -right-4 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="absolute top-12 -right-2 sm:-right-4 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
               >
                 <NextJsIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">Next.js</span>
@@ -318,11 +349,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
 
               {/* Orbiting Tech Node 3: Agentic AI */}
               <motion.div
-                animate={{
-                  y: [0, -10, 0],
-                }}
+                animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 right-10 p-2.5 rounded-xl bg-[#101629]/90 border border-[#8B5CF6]/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="absolute -bottom-4 right-8 sm:right-10 p-2.5 rounded-xl bg-[#101629]/90 border border-[#8B5CF6]/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
               >
                 <AgenticAiIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px] text-[#C4B5FD]">Agentic AI</span>
@@ -330,19 +359,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
 
               {/* Orbiting Tech Node 4: Python */}
               <motion.div
-                animate={{
-                  y: [0, 8, 0],
-                }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                className="absolute bottom-16 -left-6 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="absolute bottom-16 -left-3 sm:-left-6 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
               >
                 <PythonIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">Python</span>
               </motion.div>
-
             </motion.div>
-          </div>
-
+          </motion.div>
         </div>
       </div>
     </section>

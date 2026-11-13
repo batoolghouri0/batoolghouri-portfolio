@@ -27,21 +27,6 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Urdu and RTL styling */
-  [dir="rtl"] {
-    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: normal;
-  }
-
-  [dir="rtl"] h1,
-  [dir="rtl"] h2,
-  [dir="rtl"] h3,
-  [dir="rtl"] .font-display {
-    font-family: 'Noto Sans Arabic', 'Space Grotesk', sans-serif;
-    letter-spacing: normal;
-    line-height: 1.35;
-  }
-
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;

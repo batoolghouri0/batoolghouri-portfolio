@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Download, ExternalLink, FileText, CheckCircle2, Eye, Printer } from 'lucide-react';
+import { X, Download, ExternalLink } from 'lucide-react';
 import { BgMonogram } from './Icons';
-import { useLanguage } from '../context/LanguageContext';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -10,11 +9,9 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
-  const { t, isUrdu } = useLanguage();
   const [viewMode, setViewMode] = useState<'interactive' | 'pdf'>('interactive');
   const resumePdfPath = '/Batool_Ghouri_Resume.pdf';
 
-  // Close on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -57,62 +54,58 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               <BgMonogram size={32} />
               <div>
                 <h3 className="text-base font-display font-bold text-[#F8FAFC]">
-                  {t('resume.title')}
+                  Batool Ghouri — Official Resume
                 </h3>
                 <span className="text-xs font-mono text-[#94A3B8]">
-                  {t('resume.subtitle')}
+                  Frontend Developer &amp; AI Enthusiast · GIAIC AI Mentor
                 </span>
               </div>
             </div>
 
-            {/* Actions: View Toggle, Download, Open Tab, Close */}
+            {/* Actions */}
             <div className="flex items-center gap-2">
-              {/* Mode switch */}
               <div className="hidden sm:flex items-center p-0.5 rounded-lg bg-[#141B33] border border-white/10 text-xs">
                 <button
                   onClick={() => setViewMode('interactive')}
-                  className={`px-3 py-1 rounded-md transition-colors ${
+                  className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
                     viewMode === 'interactive'
                       ? 'bg-[#8B5CF6] text-white'
                       : 'text-[#94A3B8] hover:text-white'
                   }`}
                 >
-                  {t('resume.tab_sheet')}
+                  Digital Sheet
                 </button>
                 <button
                   onClick={() => setViewMode('pdf')}
-                  className={`px-3 py-1 rounded-md transition-colors ${
+                  className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
                     viewMode === 'pdf'
                       ? 'bg-[#8B5CF6] text-white'
                       : 'text-[#94A3B8] hover:text-white'
                   }`}
                 >
-                  {t('resume.tab_pdf')}
+                  Embedded PDF
                 </button>
               </div>
 
-              {/* Download Button */}
               <a
                 href={resumePdfPath}
                 download="Batool_Ghouri_Resume.pdf"
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#38BDF8] text-white text-xs font-semibold hover:opacity-90 transition-opacity shadow-md"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>{t('resume.download')}</span>
+                <span>Download</span>
               </a>
 
-              {/* Open in new tab */}
               <a
                 href={resumePdfPath}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden sm:flex items-center p-2 rounded-lg text-[#94A3B8] hover:text-white hover:bg-white/5 transition-colors"
-                title={t('resume.open_tab')}
+                title="Open PDF in new tab"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
 
-              {/* Close Button */}
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg text-[#94A3B8] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
@@ -123,13 +116,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
           </div>
 
-          {/* Modal Body: Scrollable Document View */}
+          {/* Modal Body */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#090D1C] text-[#F8FAFC]">
             {viewMode === 'interactive' ? (
-              /* High-Fidelity Formatted Document View */
               <div className="max-w-2xl mx-auto rounded-2xl bg-[#0F162E] border border-white/10 p-6 sm:p-10 shadow-xl space-y-8 font-sans">
-                
-                {/* Document Header */}
                 <div className="border-b border-white/10 pb-6">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -137,7 +127,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                         Batool Ghouri
                       </h1>
                       <p className="text-sm font-medium text-[#38BDF8] mt-1">
-                        Frontend Developer | AI & Agentic AI Enthusiast
+                        Frontend Developer | AI &amp; Agentic AI Enthusiast
                       </p>
                       <p className="text-xs text-[#94A3B8] mt-1">
                         AI Mentor at GIAIC · Karachi, Pakistan
@@ -151,11 +141,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   </div>
 
                   <div className="mt-4 p-3 rounded-lg bg-white/[0.03] border border-white/[0.05] text-xs italic text-[#C4B5FD]">
-                    "Curious Mind. Creative Thinking. Continuous Growth."
+                    &quot;Curious Mind. Creative Thinking. Continuous Growth.&quot;
                   </div>
                 </div>
 
-                {/* Professional Introduction */}
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-[#38BDF8] font-semibold mb-2">
                     Professional Summary
@@ -165,7 +154,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   </p>
                 </div>
 
-                {/* Technical Skills */}
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-[#8B5CF6] font-semibold mb-3">
                     Technical Universe
@@ -176,21 +164,20 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                       <p className="text-[#94A3B8]">HTML5, CSS3, TypeScript, Next.js, Tailwind CSS</p>
                     </div>
                     <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05]">
-                      <span className="font-semibold text-[#F8FAFC] block mb-1">Programming & AI</span>
+                      <span className="font-semibold text-[#F8FAFC] block mb-1">Programming &amp; AI</span>
                       <p className="text-[#94A3B8]">Python, Agentic AI, Autonomous Workflows, LLM Prompts</p>
                     </div>
                   </div>
                 </div>
 
-                {/* GIAIC Milestones & Mentorship */}
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-[#38BDF8] font-semibold mb-3">
-                    Milestones & GIAIC Journey
+                    Milestones &amp; GIAIC Journey
                   </h4>
                   <div className="space-y-3 text-xs">
                     <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05]">
                       <div className="flex justify-between items-center text-[#F8FAFC] font-semibold mb-1">
-                        <span>AI Mentor & Quarter 4 Scholar</span>
+                        <span>AI Mentor &amp; Quarter 4 Scholar</span>
                         <span className="text-[#8B5CF6] font-mono">Present</span>
                       </div>
                       <p className="text-[#94A3B8] leading-relaxed">
@@ -220,7 +207,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   </div>
                 </div>
 
-                {/* Academic Foundations */}
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-[#8B5CF6] font-semibold mb-3">
                     Academic Foundations
@@ -245,7 +231,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                   </div>
                 </div>
 
-                {/* Problem Solving Framework */}
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-[#38BDF8] font-semibold mb-2">
                     Problem-Solving Framework
@@ -255,14 +240,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     <span className="px-2.5 py-1 rounded bg-white/[0.04]">02. Understand</span>
                     <span className="px-2.5 py-1 rounded bg-white/[0.04]">03. Break It Down</span>
                     <span className="px-2.5 py-1 rounded bg-white/[0.04]">04. Research</span>
-                    <span className="px-2.5 py-1 rounded bg-white/[0.04]">05. Implement & Test</span>
-                    <span className="px-2.5 py-1 rounded bg-white/[0.04]">06. Learn & Improve</span>
+                    <span className="px-2.5 py-1 rounded bg-white/[0.04]">05. Implement &amp; Test</span>
+                    <span className="px-2.5 py-1 rounded bg-white/[0.04]">06. Learn &amp; Improve</span>
                   </div>
                 </div>
-
               </div>
             ) : (
-              /* Embedded PDF Viewer */
               <div className="w-full h-[650px] rounded-2xl overflow-hidden border border-white/10 bg-[#050711]">
                 <iframe
                   src={`${resumePdfPath}#toolbar=1&navpanes=0`}

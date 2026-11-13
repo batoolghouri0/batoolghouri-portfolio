@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import {
   Send,
   Mail,
   User,
-  MessageSquare,
   Tag,
   CheckCircle2,
   AlertCircle,
   ExternalLink,
-  Sparkles,
   Info,
   ShieldCheck,
 } from 'lucide-react';
@@ -20,11 +18,11 @@ import {
   XTwitterIcon,
   ThreadsIcon,
 } from './Icons';
-import { useLanguage } from '../context/LanguageContext';
+import { ScrollReveal } from './ScrollReveal';
+import { useViewportTier } from '../hooks/useViewportTier';
 
 interface SocialLinkConfig {
   name: string;
-  nameUrdu: string;
   icon: React.ReactNode;
   url: string;
   color: string;
@@ -34,7 +32,6 @@ interface SocialLinkConfig {
 const SOCIAL_LINKS: SocialLinkConfig[] = [
   {
     name: 'WhatsApp',
-    nameUrdu: 'واٹس ایپ',
     icon: <WhatsAppIcon className="w-5 h-5" />,
     url: 'https://wa.me/qr/TKIOTXSVHLQZP1',
     color: '#25D366',
@@ -42,7 +39,6 @@ const SOCIAL_LINKS: SocialLinkConfig[] = [
   },
   {
     name: 'Instagram',
-    nameUrdu: 'انسٹاگرام',
     icon: <InstagramIcon className="w-5 h-5" />,
     url: 'https://www.instagram.com/batool__ghouri?psln=MTNsZWE4MGt1NHZhYQ==',
     color: '#E4405F',
@@ -50,7 +46,6 @@ const SOCIAL_LINKS: SocialLinkConfig[] = [
   },
   {
     name: 'Facebook',
-    nameUrdu: 'فیس بک',
     icon: <FacebookIcon className="w-5 h-5" />,
     url: 'https://www.facebook.com/share/1FALJNwPGj/',
     color: '#1877F2',
@@ -58,7 +53,6 @@ const SOCIAL_LINKS: SocialLinkConfig[] = [
   },
   {
     name: 'Threads',
-    nameUrdu: 'تھریڈز',
     icon: <ThreadsIcon className="w-5 h-5" />,
     url: 'https://www.threads.com/@batool__ghouri',
     color: '#F8FAFC',
@@ -66,7 +60,6 @@ const SOCIAL_LINKS: SocialLinkConfig[] = [
   },
   {
     name: 'Twitter (X)',
-    nameUrdu: 'ٹوئٹر (ایکس)',
     icon: <XTwitterIcon className="w-5 h-5" />,
     url: 'https://x.com/BatoolGhouri',
     color: '#E2E8F0',
@@ -75,7 +68,19 @@ const SOCIAL_LINKS: SocialLinkConfig[] = [
 ];
 
 export const ContactSection: React.FC = () => {
-  const { t, isUrdu } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { parallaxRange, prefersReducedMotion } = useViewportTier();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const glowY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-parallaxRange * 0.6, prefersReducedMotion ? 0 : parallaxRange * 0.6]
+  );
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -95,7 +100,6 @@ export const ContactSection: React.FC = () => {
   });
   const [unconfiguredNotice, setUnconfiguredNotice] = useState<string | null>(null);
 
-  // Check email backend status
   useEffect(() => {
     fetch('/api/contact/status')
       .then((res) => res.json())
@@ -106,7 +110,7 @@ export const ContactSection: React.FC = () => {
         });
       })
       .catch(() => {
-        // Dev server fallback
+        // Fallback when offline
       });
   }, []);
 
@@ -120,7 +124,7 @@ export const ContactSection: React.FC = () => {
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
       setStatus('error');
-      setStatusMessage(isUrdu ? 'براہ کرم ارسال کرنے سے پہلے تمام خانے پر کریں۔' : 'Please complete all fields before sending.');
+      setStatusMessage('Please complete all fields before sending.');
       return;
     }
 
@@ -139,24 +143,15 @@ export const ContactSection: React.FC = () => {
 
       if (response.ok && result.success && result.deliveryMode === 'resend_live') {
         setStatus('success');
-        setStatusMessage(
-          isUrdu
-            ? 'آپ کا پیغام کامیابی کے ساتھ بتول غوری کے ان باکس میں پہنچا دیا گیا ہے!'
-            : 'Your message was delivered directly to Batool Ghouri’s inbox!'
-        );
+        setStatusMessage('Your message was delivered directly to Batool Ghouri’s inbox!');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setStatus('error');
-        setStatusMessage(
-          result.error ||
-          (isUrdu
-            ? 'پیغام بھیجنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔'
-            : 'Email delivery failed. No message was sent.')
-        );
+        setStatusMessage(result.error || 'Email delivery failed. No message was sent.');
       }
-    } catch (err: any) {
+    } catch {
       setStatus('error');
-      setStatusMessage(isUrdu ? 'سرور سے رابطہ کرنے میں نیٹ ورک کی خرابی۔' : 'Network error while connecting to server. Please verify your connection.');
+      setStatusMessage('Network error while connecting to server. Please verify your connection.');
     } finally {
       setIsSubmitting(false);
     }
@@ -164,11 +159,7 @@ export const ContactSection: React.FC = () => {
 
   const handleSocialClick = (social: SocialLinkConfig) => {
     if (!social.url) {
-      setUnconfiguredNotice(
-        isUrdu
-          ? `پروفائل لنک ابھی زیر ترتیب ہے۔`
-          : `The ${social.name} profile link is awaiting configuration.`
-      );
+      setUnconfiguredNotice(`The ${social.name} profile link is awaiting configuration.`);
       setTimeout(() => setUnconfiguredNotice(null), 5000);
       return;
     }
@@ -176,38 +167,41 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-[#080B16]">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#8B5CF6]/08 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-[#38BDF8]/06 rounded-full blur-[140px] pointer-events-none" />
+    <section ref={sectionRef} id="contact" className="py-24 relative overflow-hidden bg-[#080B16]">
+      {/* Background ambient lighting with scroll parallax */}
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#8B5CF6]/08 rounded-full blur-[160px] pointer-events-none"
+      />
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-[#38BDF8]/06 rounded-full blur-[140px] pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Section Heading & Subheading */}
-        <div className="mb-16 text-center max-w-3xl mx-auto">
+        <ScrollReveal direction="up" className="mb-16 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#38BDF8] mb-3">
             <Mail className="w-4 h-4 text-[#8B5CF6]" />
-            <span>{t('contact.kicker')}</span>
+            <span>GET IN TOUCH</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-[#F8FAFC] tracking-tight mb-4">
-            {t('contact.heading')}
+            Let&apos;s Build Connections.
           </h2>
           <p className="text-base sm:text-lg text-[#94A3B8] font-light">
-            {t('contact.subheading')}
+            I&apos;m always excited to connect with fellow developers, technology enthusiasts, learners, and people who believe in continuous growth. Have an opportunity, an idea, or simply want to connect? Feel free to reach out.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
           {/* Left Column: Social Links & Delivery Information (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            
+          <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
             <div className="p-7 rounded-3xl bg-[#0D1326] border border-white/10 shadow-xl backdrop-blur-xl">
               <h3 className="text-xl font-display font-bold text-[#F8FAFC] mb-2">
-                {t('contact.channels_title')}
+                Connect Directly
               </h3>
               <p className="text-xs text-[#94A3B8] mb-6 leading-relaxed">
-                {t('contact.channels_desc')}
+                Choose your preferred network below. Profiles launch instantly in a new browser tab.
               </p>
 
               {/* Social Channels List */}
@@ -219,7 +213,7 @@ export const ContactSection: React.FC = () => {
                     <button
                       key={social.name}
                       onClick={() => handleSocialClick(social)}
-                      className={`group relative flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-300 ${isUrdu ? 'text-right' : 'text-left'} cursor-pointer ${
+                      className={`group relative flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-300 text-left cursor-pointer ${
                         isReady
                           ? 'bg-[#101730] border-white/10 hover:border-[#38BDF8]/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)]'
                           : 'bg-white/[0.02] border-white/[0.05] hover:border-amber-400/30'
@@ -234,17 +228,17 @@ export const ContactSection: React.FC = () => {
 
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-bold text-[#F8FAFC] flex items-center justify-between">
-                          <span>{isUrdu ? social.nameUrdu : social.name}</span>
+                          <span>{social.name}</span>
                           {isReady ? (
                             <ExternalLink className="w-3 h-3 text-[#94A3B8] opacity-0 group-hover:opacity-100 transition-opacity" />
                           ) : (
                             <span className="text-[9px] font-mono text-amber-400/80 bg-amber-400/10 px-1.5 py-0.2 rounded">
-                              {isUrdu ? 'ترتیب' : 'Setup'}
+                              Setup
                             </span>
                           )}
                         </div>
                         <span className="text-[10px] text-[#94A3B8] truncate block mt-0.5">
-                          {isReady ? (isUrdu ? 'فعال پروفائل' : 'Active Profile') : (isUrdu ? 'زیر التواء لنک' : 'Pending Link')}
+                          {isReady ? 'Active Profile' : 'Pending Link'}
                         </span>
                       </div>
                     </button>
@@ -265,53 +259,47 @@ export const ContactSection: React.FC = () => {
             <div className="p-6 rounded-3xl bg-gradient-to-br from-[#101730] to-[#0A0E1D] border border-white/10 shadow-lg">
               <div className="flex items-center gap-2 text-xs font-mono text-[#38BDF8] mb-2 uppercase">
                 <ShieldCheck className="w-4 h-4 text-[#8B5CF6]" />
-                <span>{isUrdu ? 'براہ راست میل فارورڈنگ' : 'DIRECT INBOX FORWARDING'}</span>
+                <span>DIRECT INBOX FORWARDING</span>
               </div>
               <div className="text-sm font-semibold text-[#F8FAFC] mb-1">
-                {t('contact.inbox_info')} <span className="text-[#38BDF8] font-mono">{backendConfig.recipient}</span>
+                Direct delivery routed to:{' '}
+                <span className="text-[#38BDF8] font-mono">{backendConfig.recipient}</span>
               </div>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                {isUrdu
-                  ? 'یہ فارم سرور سائیڈ API کے ذریعے منسلک ہے۔ پیغامات محفوظ طریقے سے لاگ اور ای میل ان باکس میں ارسال کیے جاتے ہیں۔'
-                  : 'Form submissions are processed via our server-side API. Messages are securely logged and forwarded directly to the recipient inbox.'}
+                Form submissions are processed securely via our server-side email API and delivered directly to the recipient inbox.
               </p>
             </div>
-
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Premium Contact Form (7 Cols) */}
-          <div className="lg:col-span-7">
+          <ScrollReveal direction="right" delay={0.08} className="lg:col-span-7">
             <div className="relative rounded-3xl bg-[#0D1326] border border-white/15 p-7 sm:p-9 shadow-2xl backdrop-blur-xl">
-              
               {/* Animated Revolving Border Glow */}
               <div className="absolute -inset-[1px] rounded-3xl opacity-20 pointer-events-none bg-gradient-to-r from-[#8B5CF6] via-[#38BDF8] to-[#8B5CF6] animate-border-rotate" />
 
               <h3 className="text-2xl font-display font-bold text-[#F8FAFC] mb-1">
-                {t('contact.form_title')}
+                Send a Message
               </h3>
               <p className="text-xs text-[#94A3B8] mb-6">
-                {t('contact.form_desc')}
+                Fill in your details below and I will respond to your inquiry promptly.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                
                 {/* Full Name */}
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-2">
-                    {t('contact.label_name')} <span className="text-[#8B5CF6]">*</span>
+                    Full Name <span className="text-[#8B5CF6]">*</span>
                   </label>
                   <div className="relative">
-                    <User className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8] ${isUrdu ? 'right-3.5' : 'left-3.5'}`} />
+                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
                     <input
                       type="text"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder={isUrdu ? 'مثال: محمد احمد' : 'e.g. Alex Morgan'}
-                      className={`w-full py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-all ${
-                        isUrdu ? 'pr-10 pl-4' : 'pl-10 pr-4'
-                      }`}
+                      placeholder="e.g. Alex Morgan"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-all"
                     />
                   </div>
                 </div>
@@ -319,10 +307,10 @@ export const ContactSection: React.FC = () => {
                 {/* Email Address */}
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-2">
-                    {t('contact.label_email')} <span className="text-[#38BDF8]">*</span>
+                    Email Address <span className="text-[#38BDF8]">*</span>
                   </label>
                   <div className="relative">
-                    <Mail className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8] ${isUrdu ? 'right-3.5' : 'left-3.5'}`} />
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
                     <input
                       type="email"
                       name="email"
@@ -330,10 +318,7 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="alex@example.com"
-                      dir="ltr"
-                      className={`w-full py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all ${
-                        isUrdu ? 'pr-10 pl-4 text-right' : 'pl-10 pr-4'
-                      }`}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all"
                     />
                   </div>
                 </div>
@@ -341,20 +326,18 @@ export const ContactSection: React.FC = () => {
                 {/* Subject */}
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-2">
-                    {t('contact.label_subject')} <span className="text-[#8B5CF6]">*</span>
+                    Subject <span className="text-[#8B5CF6]">*</span>
                   </label>
                   <div className="relative">
-                    <Tag className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8] ${isUrdu ? 'right-3.5' : 'left-3.5'}`} />
+                    <Tag className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
                     <input
                       type="text"
                       name="subject"
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      placeholder={isUrdu ? 'مثال: اے آئی پروجیکٹ / تعاون / سوال' : 'e.g. Opportunity / AI Collaboration / Question'}
-                      className={`w-full py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-all ${
-                        isUrdu ? 'pr-10 pl-4' : 'pl-10 pr-4'
-                      }`}
+                      placeholder="e.g. Opportunity / AI Collaboration / Question"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-all"
                     />
                   </div>
                 </div>
@@ -363,7 +346,7 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs font-mono uppercase tracking-wider text-[#94A3B8]">
-                      {t('contact.label_message')} <span className="text-[#38BDF8]">*</span>
+                      Message <span className="text-[#38BDF8]">*</span>
                     </label>
                     <span className="text-[11px] font-mono text-[#94A3B8]/60">
                       {formData.message.length} / 3000
@@ -377,7 +360,7 @@ export const ContactSection: React.FC = () => {
                       maxLength={3000}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder={isUrdu ? 'اپنے خیالات، تجاویز یا پیغام یہاں تحریر کریں...' : 'Share your thoughts, opportunity, or feedback...'}
+                      placeholder="Share your thoughts, opportunity, or feedback..."
                       className="w-full p-4 rounded-xl bg-[#080B16] border border-white/10 text-sm text-[#F8FAFC] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all resize-none leading-relaxed"
                     />
                   </div>
@@ -392,7 +375,7 @@ export const ContactSection: React.FC = () => {
                   >
                     <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-400 mt-0.5" />
                     <div>
-                      <span className="font-bold block mb-0.5">{isUrdu ? 'پیغام کامیابی سے موصول ہوا!' : 'Message Sent Successfully!'}</span>
+                      <span className="font-bold block mb-0.5">Message Sent Successfully!</span>
                       <span>{statusMessage}</span>
                     </div>
                   </motion.div>
@@ -406,7 +389,7 @@ export const ContactSection: React.FC = () => {
                   >
                     <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-400 mt-0.5" />
                     <div>
-                      <span className="font-bold block mb-0.5">{isUrdu ? 'پیغام بھیجنے میں رکاوٹ' : 'Unable to Send Message'}</span>
+                      <span className="font-bold block mb-0.5">Unable to Send Message</span>
                       <span>{statusMessage}</span>
                     </div>
                   </motion.div>
@@ -423,24 +406,20 @@ export const ContactSection: React.FC = () => {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>{t('contact.btn_sending')}</span>
+                        <span>Dispatching Message...</span>
                       </>
                     ) : (
                       <>
-                        <span>{t('contact.btn_send')}</span>
-                        <Send className={`w-4 h-4 text-white transition-transform ${isUrdu ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'} group-hover:-translate-y-1`} />
+                        <span>Send Message</span>
+                        <Send className="w-4 h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                       </>
                     )}
                   </span>
                 </button>
-
               </form>
-
             </div>
-          </div>
-
+          </ScrollReveal>
         </div>
-
       </div>
     </section>
   );

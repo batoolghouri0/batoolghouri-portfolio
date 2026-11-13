@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { LanguageProvider } from './context/LanguageContext';
 import { LoadingScreen } from './components/LoadingScreen';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CursorSpotlight } from './components/CursorSpotlight';
@@ -15,7 +14,7 @@ import { ContactSection } from './components/ContactSection';
 import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
 
-function PortfolioApp() {
+export function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
@@ -29,7 +28,7 @@ function PortfolioApp() {
         <LoadingScreen onComplete={() => setIsLoading(false)} />
       )}
 
-      {/* Top Document Scroll Progress Bar */}
+      {/* Top Document Scroll Progress Bar & Desktop/Laptop Rail */}
       <ScrollProgress />
 
       {/* Sticky Glassmorphism Navigation */}
@@ -56,14 +55,6 @@ function PortfolioApp() {
         onClose={() => setIsResumeOpen(false)}
       />
     </div>
-  );
-}
-
-export function App() {
-  return (
-    <LanguageProvider>
-      <PortfolioApp />
-    </LanguageProvider>
   );
 }
 

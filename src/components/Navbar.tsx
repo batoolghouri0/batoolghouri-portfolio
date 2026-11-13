@@ -1,42 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText } from 'lucide-react';
 import { BgMonogram } from './Icons';
-import { LanguageToggle } from './LanguageToggle';
-import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
   onOpenResume: () => void;
 }
 
+const NAV_ITEMS = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'journey', label: 'Journey' },
+  { id: 'mentorship', label: 'Mentorship' },
+  { id: 'approach', label: 'Approach' },
+  { id: 'education', label: 'Education' },
+  { id: 'contact', label: 'Contact' },
+];
+
 export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
-  const { t, isUrdu } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navItems = [
-    { id: 'hero', label: t('nav.home') },
-    { id: 'about', label: t('nav.about') },
-    { id: 'skills', label: t('nav.skills') },
-    { id: 'journey', label: t('nav.journey') },
-    { id: 'mentorship', label: t('nav.mentorship') },
-    { id: 'approach', label: t('nav.approach') },
-    { id: 'education', label: t('nav.education') },
-    { id: 'contact', label: t('nav.contact') },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
       // Section spy
-      const sections = navItems.map((item) => document.getElementById(item.id));
+      const sections = NAV_ITEMS.map((item) => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 180;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
+          setActiveSection(NAV_ITEMS[i].id);
           break;
         }
       }
@@ -45,7 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]);
+  }, []);
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
@@ -75,17 +72,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
           </div>
           <div className="flex flex-col">
             <span className="font-display font-bold text-base text-[#F8FAFC] tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#F8FAFC] group-hover:via-[#8B5CF6] group-hover:to-[#38BDF8] transition-all">
-              {isUrdu ? 'بتول غوری' : 'Batool Ghouri'}
+              Batool Ghouri
             </span>
             <span className="text-[11px] font-mono text-[#94A3B8] tracking-wider uppercase">
-              {t('nav.role_tag')}
+              AI Mentor & Dev
             </span>
           </div>
         </button>
 
-        {/* Zone 2: Navigation Links (Desktop) */}
+        {/* Zone 2: Navigation Links (Desktop & Laptop) */}
         <nav className="hidden lg:flex items-center gap-1 p-1 bg-[#101629]/60 backdrop-blur-md border border-white/[0.06] rounded-full">
-          {navItems.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
@@ -103,11 +100,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
           })}
         </nav>
 
-        {/* Zone 3: Language Toggle + Primary Action (Resume) + Mobile Button */}
+        {/* Zone 3: Primary Action (Resume) + Mobile/Tablet Menu Button */}
         <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          {/* Language Switcher */}
-          <LanguageToggle />
-
           {/* View Resume Button */}
           <button
             onClick={onOpenResume}
@@ -118,11 +112,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             {/* Inner Background */}
             <span className="relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[7px] bg-[#0C1224] text-[#F8FAFC] group-hover:bg-[#101730] transition-colors whitespace-nowrap">
               <FileText className="w-3.5 h-3.5 text-[#38BDF8] group-hover:scale-110 transition-transform" />
-              <span>{t('nav.resume')}</span>
+              <span>View Resume</span>
             </span>
           </button>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile & Tablet Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-lg bg-[#101629] border border-white/10 text-[#F8FAFC] hover:text-[#38BDF8] transition-colors cursor-pointer"
@@ -133,16 +127,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile & Tablet Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[65px] bg-[#080B16]/95 backdrop-blur-xl border-b border-white/10 p-6 shadow-2xl transition-all">
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
-            <span className="text-xs font-mono text-[#94A3B8]">Language / زبان</span>
-            <LanguageToggle />
-          </div>
-
+        <div className="lg:hidden fixed inset-x-0 top-[65px] bg-[#080B16]/95 backdrop-blur-xl border-b border-white/10 p-6 shadow-2xl transition-all max-h-[calc(100vh-65px)] overflow-y-auto">
           <nav className="flex flex-col gap-2">
-            {navItems.map((item) => {
+            {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
@@ -155,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
                   }`}
                 >
                   <span>{item.label}</span>
-                  {isActive && <span className="text-xs font-mono text-[#38BDF8]">{t('nav.active')}</span>}
+                  {isActive && <span className="text-xs font-mono text-[#38BDF8]">Active</span>}
                 </button>
               );
             })}
@@ -165,10 +154,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
                   setMobileMenuOpen(false);
                   onOpenResume();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#38BDF8] text-white font-medium text-sm shadow-lg"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-[#8B5CF6] to-[#38BDF8] text-white font-medium text-sm shadow-lg cursor-pointer"
               >
                 <FileText className="w-4 h-4" />
-                {t('nav.resume')}
+                View Resume
               </button>
             </div>
           </nav>
