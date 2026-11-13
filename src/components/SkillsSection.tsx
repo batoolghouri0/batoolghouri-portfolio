@@ -148,10 +148,10 @@ export const SkillsSection: React.FC = () => {
               <button
                 key={cat.key}
                 onClick={() => setActiveCategoryKey(cat.key)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer active:scale-95 ${
                   activeCategoryKey === cat.key
-                    ? 'bg-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.4)]'
-                    : 'bg-[#101629] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#161F38] border border-white/[0.06]'
+                    ? 'bg-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.45)]'
+                    : 'bg-[#101629] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#161F38] hover:border-[#38BDF8]/40 hover:-translate-y-0.5 border border-white/[0.06]'
                 }`}
               >
                 {cat.label}
@@ -169,7 +169,7 @@ export const SkillsSection: React.FC = () => {
 
         {/* Footer Note on Growth */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="mt-14 p-6 rounded-2xl bg-[#101629]/40 border border-white/[0.05] text-center max-w-2xl mx-auto">
+          <div className="interactive-card interactive-card-cyan mt-14 p-6 rounded-2xl bg-[#101629]/40 border border-white/[0.05] text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#38BDF8] mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               <span>EXPANDING CAPABILITIES</span>

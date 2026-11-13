@@ -50,7 +50,7 @@ export const MentorshipSection: React.FC = () => {
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#8B5CF6] via-[#EC4899] to-[#38BDF8] opacity-60 blur-xl animate-pulse-subtle" />
 
               {/* Main Card */}
-              <div className="relative rounded-3xl bg-[#0E152D] border border-white/15 p-8 shadow-2xl backdrop-blur-2xl overflow-hidden">
+              <div className="interactive-card interactive-card-pink relative rounded-3xl bg-[#0E152D] border border-white/15 p-8 shadow-2xl backdrop-blur-2xl overflow-hidden">
                 {/* Decorative Spotlight Sweep */}
                 <div className="absolute -top-24 -left-24 w-52 h-52 bg-[#8B5CF6]/30 rounded-full blur-3xl pointer-events-none" />
 
@@ -74,7 +74,7 @@ export const MentorshipSection: React.FC = () => {
                     </h3>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                  <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#38BDF8]/40 transition-colors">
                     <span className="text-[11px] font-mono text-[#94A3B8] block mb-1">
                       Credential Verified
                     </span>
@@ -84,7 +84,7 @@ export const MentorshipSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-gradient-to-r from-[#8B5CF6]/15 to-[#38BDF8]/10 border border-[#8B5CF6]/30">
+                  <div className="p-3.5 rounded-xl bg-gradient-to-r from-[#8B5CF6]/15 to-[#38BDF8]/10 border border-[#8B5CF6]/30 hover:border-[#8B5CF6]/60 transition-colors">
                     <span className="text-[11px] font-mono text-[#C4B5FD] block mb-1">
                       Active Mandate
                     </span>
@@ -106,7 +106,7 @@ export const MentorshipSection: React.FC = () => {
           {/* Right Column: Narrative Journey & Interactive Values (7 Cols) */}
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="right" delay={0.08}>
-              <div className="p-8 rounded-3xl bg-[#0E152D]/80 border border-white/10 backdrop-blur-xl shadow-xl hover:border-[#8B5CF6]/30 transition-colors">
+              <div className="interactive-card interactive-card-violet p-8 rounded-3xl bg-[#0E152D]/80 border border-white/10 backdrop-blur-xl shadow-xl">
                 <p className="text-lg text-[#F8FAFC] font-medium leading-relaxed mb-4">
                   Learning has always been an important part of my journey. But one of the most meaningful milestones was getting the opportunity to share what I&apos;ve learned with others.
                 </p>
@@ -122,11 +122,11 @@ export const MentorshipSection: React.FC = () => {
             {/* Core Mentorship Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <ScrollReveal direction="up" index={0}>
-                <div className="h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06] hover:border-[#8B5CF6]/40 hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-8 h-8 rounded-lg bg-[#8B5CF6]/20 flex items-center justify-center text-[#8B5CF6] mb-3">
+                <div className="interactive-card interactive-card-violet group h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06]">
+                  <div className="w-8 h-8 rounded-lg bg-[#8B5CF6]/20 flex items-center justify-center text-[#8B5CF6] mb-3 group-hover:scale-110 transition-transform">
                     <Network className="w-4 h-4" />
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Concept Clarity</h4>
+                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-[#C4B5FD] transition-colors">Concept Clarity</h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
                     Deconstructing programming and AI principles into clear mental models.
                   </p>
@@ -134,11 +134,11 @@ export const MentorshipSection: React.FC = () => {
               </ScrollReveal>
 
               <ScrollReveal direction="up" index={1}>
-                <div className="h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06] hover:border-[#38BDF8]/40 hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-8 h-8 rounded-lg bg-[#38BDF8]/20 flex items-center justify-center text-[#38BDF8] mb-3">
+                <div className="interactive-card interactive-card-cyan group h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06]">
+                  <div className="w-8 h-8 rounded-lg bg-[#38BDF8]/20 flex items-center justify-center text-[#38BDF8] mb-3 group-hover:scale-110 transition-transform">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Exam Readiness</h4>
+                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-[#38BDF8] transition-colors">Exam Readiness</h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
                     Guiding peers through rigorous prep for their PCAO-F milestone.
                   </p>
@@ -146,11 +146,11 @@ export const MentorshipSection: React.FC = () => {
               </ScrollReveal>
 
               <ScrollReveal direction="up" index={2}>
-                <div className="h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06] hover:border-[#EC4899]/40 hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-8 h-8 rounded-lg bg-[#EC4899]/20 flex items-center justify-center text-[#EC4899] mb-3">
+                <div className="interactive-card interactive-card-pink group h-full p-5 rounded-2xl bg-[#0E152D]/50 border border-white/[0.06]">
+                  <div className="w-8 h-8 rounded-lg bg-[#EC4899]/20 flex items-center justify-center text-[#EC4899] mb-3 group-hover:scale-110 transition-transform">
                     <Users className="w-4 h-4" />
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1">Mutual Growth</h4>
+                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-[#F472B6] transition-colors">Mutual Growth</h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
                     Fostering collaborative problem-solving and shared technical confidence.
                   </p>

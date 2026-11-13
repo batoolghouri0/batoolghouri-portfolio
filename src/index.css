@@ -127,3 +127,48 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Cross-screen interactive card hover & touch-tap micro-interactions */
+.interactive-card {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              background-color 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-4px);
+  }
+  .interactive-card-violet:hover {
+    border-color: rgba(139, 92, 246, 0.55);
+    box-shadow: 0 12px 35px -10px rgba(139, 92, 246, 0.35);
+  }
+  .interactive-card-cyan:hover {
+    border-color: rgba(56, 189, 248, 0.55);
+    box-shadow: 0 12px 35px -10px rgba(56, 189, 248, 0.35);
+  }
+  .interactive-card-pink:hover {
+    border-color: rgba(236, 72, 153, 0.55);
+    box-shadow: 0 12px 35px -10px rgba(236, 72, 153, 0.35);
+  }
+}
+
+.interactive-card:active {
+  transform: scale(0.985);
+}
+
+.interactive-card-violet:active {
+  border-color: rgba(139, 92, 246, 0.65);
+  box-shadow: 0 0 28px -6px rgba(139, 92, 246, 0.45);
+}
+
+.interactive-card-cyan:active {
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 0 28px -6px rgba(56, 189, 248, 0.45);
+}
+
+.interactive-card-pink:active {
+  border-color: rgba(236, 72, 153, 0.65);
+  box-shadow: 0 0 28px -6px rgba(236, 72, 153, 0.45);
+}

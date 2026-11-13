@@ -159,17 +159,17 @@ export const LearningTimeline: React.FC = () => {
                       whileInView={{ opacity: 1, x: 0, y: 0 }}
                       viewport={{ once: true, amount: viewportAmount, margin: viewportMargin }}
                       transition={{ duration, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                      className={`relative group rounded-2xl p-6 sm:p-7 backdrop-blur-xl border transition-all duration-300 hover:-translate-y-1 ${
+                      className={`interactive-card relative group rounded-2xl p-6 sm:p-7 backdrop-blur-xl border ${
                         isCurrent
-                          ? 'bg-[#101730] border-[#8B5CF6]/70 shadow-[0_0_35px_rgba(139,92,246,0.35)] ring-1 ring-[#8B5CF6]/40 hover:shadow-[0_0_50px_rgba(139,92,246,0.5)]'
+                          ? 'interactive-card-pink bg-[#101730] border-[#8B5CF6]/70 shadow-[0_0_35px_rgba(139,92,246,0.35)] ring-1 ring-[#8B5CF6]/40 hover:shadow-[0_0_50px_rgba(139,92,246,0.5)]'
                           : isUpcoming
-                          ? 'bg-[#0C1122]/70 border-white/[0.08] hover:border-[#8B5CF6]/40 hover:shadow-[0_0_25px_rgba(139,92,246,0.2)]'
-                          : 'bg-[#0E1428] border-white/[0.08] hover:border-[#38BDF8]/60 hover:shadow-[0_0_35px_rgba(56,189,248,0.3)] shadow-xl'
+                          ? 'interactive-card-violet bg-[#0C1122]/70 border-white/[0.08] hover:border-[#8B5CF6]/45 hover:shadow-[0_0_25px_rgba(139,92,246,0.25)]'
+                          : 'interactive-card-cyan bg-[#0E1428] border-white/[0.08] hover:border-[#38BDF8]/60 hover:shadow-[0_0_35px_rgba(56,189,248,0.3)] shadow-xl'
                       }`}
                     >
                       {/* Active Indicator Pulse for Current Role */}
                       {isCurrent && (
-                        <div className="absolute -top-3 right-6 px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white font-bold shadow-[0_0_15px_rgba(236,72,153,0.5)] flex items-center gap-1.5">
+                        <div className="absolute -top-3 right-6 px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white font-bold shadow-[0_0_15px_rgba(236,72,153,0.5)] flex items-center gap-1.5 group-hover:scale-105 transition-transform duration-300">
                           <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                           <span>CURRENT MILESTONE</span>
                         </div>
@@ -177,11 +177,11 @@ export const LearningTimeline: React.FC = () => {
 
                       {/* Header Row: Period & Tag */}
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="text-xs font-mono font-semibold tracking-wider text-[#38BDF8]">
+                        <span className="text-xs font-mono font-semibold tracking-wider text-[#38BDF8] group-hover:text-white transition-colors duration-300">
                           {item.period}
                         </span>
                         <span
-                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-md border"
+                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-md border transition-transform duration-300 group-hover:scale-105"
                           style={{
                             borderColor: `${item.badgeColor}40`,
                             backgroundColor: `${item.badgeColor}12`,
@@ -193,12 +193,12 @@ export const LearningTimeline: React.FC = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl sm:text-2xl font-display font-bold text-[#F8FAFC] tracking-tight mb-3">
+                      <h3 className="text-xl sm:text-2xl font-display font-bold text-[#F8FAFC] tracking-tight mb-3 group-hover:text-[#38BDF8] transition-colors duration-300">
                         {item.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm text-[#94A3B8] leading-relaxed">
+                      <p className="text-sm text-[#94A3B8] leading-relaxed group-hover:text-[#CBD5E1] transition-colors duration-300">
                         {item.desc}
                       </p>
 
@@ -206,11 +206,11 @@ export const LearningTimeline: React.FC = () => {
                       <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-[#94A3B8]">
                         <span className="flex items-center gap-1.5">
                           {isCurrent ? (
-                            <Award className="w-3.5 h-3.5 text-[#EC4899]" />
+                            <Award className="w-3.5 h-3.5 text-[#EC4899] group-hover:scale-110 transition-transform" />
                           ) : isUpcoming ? (
-                            <Compass className="w-3.5 h-3.5 text-[#94A3B8]" />
+                            <Compass className="w-3.5 h-3.5 text-[#94A3B8] group-hover:rotate-45 transition-transform duration-300" />
                           ) : (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8]" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8] group-hover:scale-110 transition-transform" />
                           )}
                           <span className="capitalize">{item.status}</span>
                         </span>
@@ -228,12 +228,12 @@ export const LearningTimeline: React.FC = () => {
                     className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-20"
                   >
                     <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-transform duration-300 ${
+                      className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-transform duration-300 hover:scale-115 active:scale-95 ${
                         isCurrent
                           ? 'bg-[#8B5CF6] border-white shadow-[0_0_20px_#8B5CF6] scale-110 animate-pulse'
                           : isUpcoming
-                          ? 'bg-[#080B16] border-[#94A3B8]/40 text-[#94A3B8]'
-                          : 'bg-[#0D1326] border-[#38BDF8] text-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.5)]'
+                          ? 'bg-[#080B16] border-[#94A3B8]/40 text-[#94A3B8] hover:border-[#8B5CF6]/60'
+                          : 'bg-[#0D1326] border-[#38BDF8] text-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.5)] hover:shadow-[0_0_20px_rgba(56,189,248,0.75)]'
                       }`}
                     >
                       {isCurrent ? (

@@ -24,7 +24,6 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
     yDistance,
     staggerDelay,
     duration,
-    viewportAmount,
     viewportMargin,
     prefersReducedMotion,
   } = useViewportTier();
@@ -51,6 +50,22 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
       x: (x / rect.width) * 100,
       y: (y / rect.height) * 100,
     });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !e.touches[0]) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const y = e.touches[0].clientY - rect.top;
+    setGlowPos({
+      x: Math.max(0, Math.min(100, (x / rect.width) * 100)),
+      y: Math.max(0, Math.min(100, (y / rect.height) * 100)),
+    });
+    setIsHovered(true);
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => setIsHovered(false), 350);
   };
 
   const handleMouseEnter = () => setIsHovered(true);
@@ -83,7 +98,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
           : { opacity: 0, y: yDistance, scale: isPhone ? 0.98 : 0.95 }
       }
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: viewportAmount, margin: viewportMargin }}
+      viewport={{ once: true, amount: 'some', margin: viewportMargin }}
       transition={{
         duration,
         delay: colDelay,
@@ -96,29 +111,37 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={{
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${
-            isHovered ? 'scale(1.02)' : 'scale(1)'
-          }`,
-          transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out',
+          transform: isPhone
+            ? isHovered
+              ? 'scale(0.985)'
+              : 'scale(1)'
+            : `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${
+                isHovered ? 'scale(1.02)' : 'scale(1)'
+              }`,
+          transition: isHovered ? 'transform 0.12s ease-out' : 'transform 0.4s ease-out',
         }}
-        className="group relative h-full rounded-2xl bg-[#0D1326] border border-white/[0.08] p-6 shadow-xl backdrop-blur-md overflow-hidden cursor-pointer"
+        className="group relative h-full rounded-2xl bg-[#0D1326] border border-white/[0.08] hover:border-white/25 active:border-white/30 p-6 shadow-xl backdrop-blur-md overflow-hidden cursor-pointer"
       >
         {/* Continuous Revolving Border Beam */}
         <div
-          className="absolute -inset-[1px] rounded-2xl opacity-40 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          className={`absolute -inset-[1px] rounded-2xl transition-opacity duration-300 pointer-events-none ${
+            isHovered ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'
+          }`}
           style={{
             background: `conic-gradient(from 0deg, transparent 0deg 340deg, ${skill.accentColor} 360deg)`,
             animation: 'border-rotate 6s linear infinite',
           }}
         />
 
-        {/* Soft Radial Cursor Follower Glow */}
-        {isHovered && !isPhone && (
+        {/* Soft Radial Cursor / Touch Spotlight Glow (all screens) */}
+        {isHovered && (
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300"
             style={{
-              background: `radial-gradient(circle 180px at ${glowPos.x}% ${glowPos.y}%, ${skill.accentColor}25, transparent 80%)`,
+              background: `radial-gradient(circle 180px at ${glowPos.x}% ${glowPos.y}%, ${skill.accentColor}30, transparent 80%)`,
             }}
           />
         )}
@@ -146,7 +169,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
 
             {/* Icon & Title Header */}
             <div className="flex items-center gap-3.5 mb-3">
-              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] group-hover:scale-110 group-hover:bg-white/[0.08] transition-all duration-300 shrink-0">
+              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] group-hover:scale-110 group-hover:bg-white/[0.08] group-active:scale-105 transition-all duration-300 shrink-0">
                 {skill.icon}
               </div>
               <div>
@@ -166,7 +189,9 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill, index }) => {
           {/* Bottom subtle border highlight */}
           <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#94A3B8]/70">
             <span>Hands-on Focus</span>
-            <span className="group-hover:text-[#F8FAFC] transition-colors">Active Exploration →</span>
+            <span className="group-hover:text-[#F8FAFC] group-hover:translate-x-0.5 transition-all">
+              Active Exploration →
+            </span>
           </div>
         </div>
       </div>

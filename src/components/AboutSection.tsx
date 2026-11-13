@@ -160,7 +160,7 @@ export const AboutSection: React.FC = () => {
           {/* Right Column: Narrative Content & Values (7 Cols) */}
           <div className="lg:col-span-7 space-y-6 text-[#94A3B8] text-base leading-relaxed">
             <ScrollReveal direction="right" delay={0.05}>
-              <div className="p-6 rounded-2xl bg-[#101629]/60 border border-white/[0.08] backdrop-blur-md hover:border-[#8B5CF6]/30 transition-colors">
+              <div className="interactive-card interactive-card-violet p-6 rounded-2xl bg-[#101629]/60 border border-white/[0.08] backdrop-blur-md">
                 <p className="text-[#F8FAFC] text-lg font-medium leading-relaxed mb-4">
                   I&apos;m Batool Ghouri, a Computer Science student and aspiring technology professional. My journey started in 2024 through GIAIC (Governor&apos;s Initiative for AI and Computing), where I began exploring programming and modern technologies.
                 </p>
@@ -171,7 +171,7 @@ export const AboutSection: React.FC = () => {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={0.12}>
-              <div className="p-6 rounded-2xl bg-gradient-to-r from-[#8B5CF6]/10 via-[#101629]/50 to-transparent border border-[#8B5CF6]/20 hover:border-[#38BDF8]/40 transition-colors">
+              <div className="interactive-card interactive-card-cyan p-6 rounded-2xl bg-gradient-to-r from-[#8B5CF6]/10 via-[#101629]/50 to-transparent border border-[#8B5CF6]/20">
                 <h4 className="text-sm font-mono tracking-widest text-[#38BDF8] uppercase mb-2 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#8B5CF6]" />
                   CORE PERSPECTIVE
@@ -185,7 +185,7 @@ export const AboutSection: React.FC = () => {
             {/* 3 Pillars of Identity */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <ScrollReveal direction="up" index={0}>
-                <div className="h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05] hover:border-[#8B5CF6]/40 hover:-translate-y-1 transition-all duration-300">
+                <div className="interactive-card interactive-card-violet h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05]">
                   <div className="text-[#8B5CF6] font-display font-bold text-lg mb-1">Curious Mind</div>
                   <p className="text-xs text-[#94A3B8]">
                     Continuously asking why, dissecting systems, and embracing technical challenges.
@@ -193,7 +193,7 @@ export const AboutSection: React.FC = () => {
                 </div>
               </ScrollReveal>
               <ScrollReveal direction="up" index={1}>
-                <div className="h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05] hover:border-[#38BDF8]/40 hover:-translate-y-1 transition-all duration-300">
+                <div className="interactive-card interactive-card-cyan h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05]">
                   <div className="text-[#38BDF8] font-display font-bold text-lg mb-1">Creative Thinking</div>
                   <p className="text-xs text-[#94A3B8]">
                     Translating logical algorithms into fluid, intuitive user experiences.
@@ -201,7 +201,7 @@ export const AboutSection: React.FC = () => {
                 </div>
               </ScrollReveal>
               <ScrollReveal direction="up" index={2}>
-                <div className="h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05] hover:border-[#C4B5FD]/40 hover:-translate-y-1 transition-all duration-300">
+                <div className="interactive-card interactive-card-violet h-full p-4 rounded-xl bg-[#101629]/40 border border-white/[0.05]">
                   <div className="text-[#C4B5FD] font-display font-bold text-lg mb-1">Continuous Growth</div>
                   <p className="text-xs text-[#94A3B8]">
                     Evolving from learner to mentor and giving back to the community.

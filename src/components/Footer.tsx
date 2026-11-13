@@ -35,17 +35,23 @@ export const Footer: React.FC = () => {
       <ScrollReveal direction="up" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
           {/* Brand Info */}
-          <div className="flex items-center gap-3">
-            <BgMonogram size={42} />
+          <button
+            type="button"
+            onClick={() => scrollTo('hero')}
+            className="flex items-center gap-3 group cursor-pointer text-left active:scale-95 transition-transform"
+          >
+            <span className="group-hover:scale-105 transition-transform duration-300">
+              <BgMonogram size={42} />
+            </span>
             <div>
-              <div className="font-display font-bold text-base text-[#F8FAFC]">
+              <div className="font-display font-bold text-base text-[#F8FAFC] group-hover:text-[#38BDF8] transition-colors">
                 Batool Ghouri
               </div>
               <div className="text-[11px] font-mono text-[#38BDF8]">
                 Frontend Developer | AI Enthusiast · AI Mentor @ GIAIC
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Brand Philosophy */}
           <div className="text-center md:text-right max-w-sm">
@@ -60,31 +66,25 @@ export const Footer: React.FC = () => {
 
         {/* Links & Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs">
-            <button onClick={() => scrollTo('hero')} className="hover:text-white transition-colors cursor-pointer">
-              Home
-            </button>
-            <button onClick={() => scrollTo('about')} className="hover:text-white transition-colors cursor-pointer">
-              About
-            </button>
-            <button onClick={() => scrollTo('skills')} className="hover:text-white transition-colors cursor-pointer">
-              Skills
-            </button>
-            <button onClick={() => scrollTo('journey')} className="hover:text-white transition-colors cursor-pointer">
-              Journey
-            </button>
-            <button onClick={() => scrollTo('mentorship')} className="hover:text-white transition-colors cursor-pointer">
-              Mentorship
-            </button>
-            <button onClick={() => scrollTo('approach')} className="hover:text-white transition-colors cursor-pointer">
-              Approach
-            </button>
-            <button onClick={() => scrollTo('education')} className="hover:text-white transition-colors cursor-pointer">
-              Education
-            </button>
-            <button onClick={() => scrollTo('contact')} className="hover:text-white transition-colors cursor-pointer">
-              Contact
-            </button>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
+            {[
+              { id: 'hero', label: 'Home' },
+              { id: 'about', label: 'About' },
+              { id: 'skills', label: 'Skills' },
+              { id: 'journey', label: 'Journey' },
+              { id: 'mentorship', label: 'Mentorship' },
+              { id: 'approach', label: 'Approach' },
+              { id: 'education', label: 'Education' },
+              { id: 'contact', label: 'Contact' },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className="py-1 text-[#94A3B8] hover:text-white hover:-translate-y-0.5 active:scale-95 active:text-[#38BDF8] transition-all duration-200 cursor-pointer"
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
           {/* Copyright */}
@@ -103,7 +103,7 @@ export const Footer: React.FC = () => {
             exit={{ opacity: 0, scale: 0.85, y: 12 }}
             transition={{ duration: 0.25 }}
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 p-2.5 sm:p-3 rounded-xl bg-[#101629]/90 border border-white/10 text-[#F8FAFC] hover:text-[#38BDF8] hover:border-[#38BDF8]/40 hover:shadow-[0_0_20px_rgba(56,189,248,0.3)] backdrop-blur-md transition-colors duration-300 cursor-pointer shadow-xl group"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 p-2.5 sm:p-3 rounded-xl bg-[#101629]/90 border border-white/10 text-[#F8FAFC] hover:text-[#38BDF8] hover:border-[#38BDF8]/50 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(56,189,248,0.35)] active:scale-90 backdrop-blur-md transition-all duration-300 cursor-pointer shadow-xl group"
             aria-label="Back to top"
           >
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />

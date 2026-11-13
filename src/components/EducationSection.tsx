@@ -42,14 +42,14 @@ export const EducationSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: viewportAmount, margin: viewportMargin }}
             transition={{ duration, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative rounded-2xl bg-[#0D1326] border border-white/[0.08] hover:border-[#8B5CF6]/50 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] flex flex-col justify-between"
+            className="interactive-card interactive-card-violet group relative rounded-2xl bg-[#0D1326] border border-white/[0.08] p-6 sm:p-7 shadow-xl backdrop-blur-md flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30">
+                <div className="p-3 rounded-xl bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30 group-hover:scale-110 group-hover:bg-[#8B5CF6]/25 transition-all duration-300">
                   <GraduationCap className="w-6 h-6 text-[#8B5CF6]" />
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/20">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/20 group-hover:border-[#38BDF8]/50 transition-colors">
                   <Calendar className="w-3 h-3" />
                   2026 – Present
                 </span>
@@ -61,7 +61,7 @@ export const EducationSection: React.FC = () => {
               <p className="text-xs font-mono text-[#94A3B8] mb-1">Government Degree Girls College Al-Noor</p>
               <p className="text-[11px] font-mono text-[#38BDF8] mb-4">First Year Student</p>
 
-              <p className="text-sm text-[#94A3B8] leading-relaxed">
+              <p className="text-sm text-[#94A3B8] leading-relaxed group-hover:text-[#CBD5E1] transition-colors">
                 Currently pursuing Intermediate education in Computer Science, reinforcing mathematics, algorithmic thinking, and core sciences.
               </p>
             </div>
@@ -78,14 +78,14 @@ export const EducationSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: viewportAmount, margin: viewportMargin }}
             transition={{ duration, delay: staggerDelay, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative rounded-2xl bg-[#0D1326] border border-white/[0.08] hover:border-[#38BDF8]/50 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(56,189,248,0.25)] flex flex-col justify-between"
+            className="interactive-card interactive-card-cyan group relative rounded-2xl bg-[#0D1326] border border-white/[0.08] p-6 sm:p-7 shadow-xl backdrop-blur-md flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-[#38BDF8]/15 text-[#38BDF8] border border-[#38BDF8]/30">
+                <div className="p-3 rounded-xl bg-[#38BDF8]/15 text-[#38BDF8] border border-[#38BDF8]/30 group-hover:scale-110 group-hover:bg-[#38BDF8]/25 transition-all duration-300">
                   <School className="w-6 h-6" />
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#94A3B8] bg-white/[0.04] border border-white/10">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#94A3B8] bg-white/[0.04] border border-white/10 group-hover:border-[#38BDF8]/40 group-hover:text-[#F8FAFC] transition-colors">
                   <Calendar className="w-3 h-3" />
                   2025 – 2026
                 </span>
@@ -96,7 +96,7 @@ export const EducationSection: React.FC = () => {
               </h3>
               <p className="text-xs font-mono text-[#94A3B8] mb-4">The Best Future Grammar School</p>
 
-              <p className="text-sm text-[#94A3B8] leading-relaxed">
+              <p className="text-sm text-[#94A3B8] leading-relaxed group-hover:text-[#CBD5E1] transition-colors">
                 Successfully completed matriculation in Computer Science with a strong academic foundation in computing and quantitative studies.
               </p>
             </div>
@@ -113,14 +113,14 @@ export const EducationSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: viewportAmount, margin: viewportMargin }}
             transition={{ duration, delay: staggerDelay * 2, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative rounded-2xl bg-gradient-to-br from-[#101730] to-[#0A0E1D] border border-[#8B5CF6]/40 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(139,92,246,0.35)] flex flex-col justify-between ring-1 ring-[#8B5CF6]/30"
+            className="interactive-card interactive-card-pink group relative rounded-2xl bg-gradient-to-br from-[#101730] to-[#0A0E1D] border border-[#8B5CF6]/40 p-6 sm:p-7 shadow-xl backdrop-blur-md flex flex-col justify-between ring-1 ring-[#8B5CF6]/30"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-[#EC4899]/15 text-[#EC4899] border border-[#EC4899]/30">
+                <div className="p-3 rounded-xl bg-[#EC4899]/15 text-[#EC4899] border border-[#EC4899]/30 group-hover:scale-110 group-hover:bg-[#EC4899]/25 transition-all duration-300">
                   <Award className="w-6 h-6" />
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#C4B5FD] bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 font-semibold">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-[#C4B5FD] bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 font-semibold group-hover:scale-105 transition-transform">
                   <Sparkles className="w-3 h-3 text-[#38BDF8]" />
                   Quarter 4
                 </span>
@@ -132,15 +132,15 @@ export const EducationSection: React.FC = () => {
               <p className="text-xs font-mono text-[#38BDF8] mb-4">Governor&apos;s Initiative for AI &amp; Computing</p>
 
               <div className="space-y-2 text-xs text-[#94A3B8]">
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover:border-white/[0.1] transition-colors">
                   <span>PCAO-F Exam</span>
                   <span className="text-[#38BDF8] font-bold">Successfully Cleared</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover:border-white/[0.1] transition-colors">
                   <span>Current Role</span>
                   <span className="text-[#F8FAFC] font-semibold">AI Mentor</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover:border-white/[0.1] transition-colors">
                   <span>Next Academic Goal</span>
                   <span className="text-[#A78BFA] font-medium">CCAO-F Prep</span>
                 </div>

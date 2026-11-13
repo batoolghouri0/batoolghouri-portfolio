@@ -177,7 +177,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                 HELLO, WORLD! I&apos;M
               </span>
               <span className="text-slate-600">·</span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#8B5CF6]/15 text-[#C4B5FD] border border-[#8B5CF6]/30 hover:border-[#38BDF8]/60 hover:bg-[#8B5CF6]/25 hover:shadow-[0_0_20px_rgba(139,92,246,0.35)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.2)] cursor-default">
                 <Bot className="w-3.5 h-3.5 text-[#38BDF8]" />
                 AI Mentor @ GIAIC
               </span>
@@ -198,7 +198,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                   className={
                     char === ' '
                       ? 'inline-block w-3 sm:w-4'
-                      : 'inline-block transition-colors hover:text-[#38BDF8]'
+                      : 'inline-block transition-colors duration-200 hover:text-[#38BDF8] active:text-[#38BDF8]'
                   }
                 >
                   {char}
@@ -233,7 +233,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="mb-8 px-4 py-2 rounded-lg bg-[#101629]/80 border border-white/[0.08] backdrop-blur-md flex items-center gap-3 text-xs sm:text-sm text-[#F8FAFC]"
+              className="interactive-card interactive-card-violet mb-8 px-4 py-2 rounded-lg bg-[#101629]/80 border border-white/[0.08] backdrop-blur-md flex items-center gap-3 text-xs sm:text-sm text-[#F8FAFC]"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shadow-[0_0_8px_#8B5CF6]" />
               <span className="italic font-mono text-[#C4B5FD]">
@@ -251,7 +251,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               {/* Primary CTA: Explore My Journey */}
               <button
                 onClick={() => scrollTo('journey')}
-                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-medium text-sm text-[#F8FAFC] overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(139,92,246,0.35)] hover:shadow-[0_0_45px_rgba(56,189,248,0.5)] cursor-pointer"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-medium text-sm text-[#F8FAFC] overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(139,92,246,0.35)] hover:shadow-[0_0_45px_rgba(56,189,248,0.5)] hover:-translate-y-0.5 active:scale-95 cursor-pointer"
               >
                 {/* Rotating Gradient Outline */}
                 <span className="absolute inset-0 rounded-xl p-[1.5px] bg-gradient-to-r from-[#8B5CF6] via-[#38BDF8] to-[#8B5CF6] bg-[length:200%_auto] animate-border-rotate" />
@@ -264,7 +264,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               {/* Secondary CTA: Let's Connect */}
               <button
                 onClick={() => scrollTo('contact')}
-                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm text-[#F8FAFC] bg-[#101629]/90 hover:bg-[#151D36] border border-white/10 hover:border-[#38BDF8]/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-pointer"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm text-[#F8FAFC] bg-[#101629]/90 hover:bg-[#151D36] border border-white/10 hover:border-[#38BDF8]/50 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] cursor-pointer"
               >
                 <Send className="w-4 h-4 text-[#38BDF8] group-hover:rotate-12 transition-transform" />
                 <span>Let&apos;s Connect</span>
@@ -273,9 +273,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               {/* Tertiary Action: View Resume */}
               <button
                 onClick={onOpenResume}
-                className="inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#94A3B8] hover:text-[#F8FAFC] transition-colors cursor-pointer"
+                className="group inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#94A3B8] hover:text-[#F8FAFC] active:scale-95 rounded-lg hover:bg-white/[0.04] transition-all cursor-pointer"
               >
-                <FileText className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <FileText className="w-3.5 h-3.5 text-[#8B5CF6] group-hover:scale-110 transition-transform" />
                 <span>Resume (PDF)</span>
               </button>
             </motion.div>
@@ -309,8 +309,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               <div className="absolute inset-12 rounded-full border border-[#818CF8]/30 rotate-45 animate-pulse" />
 
               {/* Central Abstract Glowing Core Container */}
-              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl bg-gradient-to-br from-[#101629]/95 via-[#0C1224]/90 to-[#080B16] border border-white/10 shadow-[0_0_60px_rgba(139,92,246,0.35)] backdrop-blur-2xl flex flex-col items-center justify-center p-6 group">
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#8B5CF6]/20 to-[#38BDF8]/20 opacity-40 group-hover:opacity-70 transition-opacity" />
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl bg-gradient-to-br from-[#101629]/95 via-[#0C1224]/90 to-[#080B16] border border-white/10 hover:border-[#8B5CF6]/50 shadow-[0_0_60px_rgba(139,92,246,0.35)] hover:shadow-[0_0_80px_rgba(56,189,248,0.45)] backdrop-blur-2xl flex flex-col items-center justify-center p-6 group transition-all duration-500 active:scale-95">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#8B5CF6]/20 to-[#38BDF8]/20 opacity-40 group-hover:opacity-80 transition-opacity" />
 
                 {/* Center Monogram */}
                 <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
@@ -321,7 +321,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
                   <span className="text-[10px] font-mono tracking-widest text-[#94A3B8] uppercase block">
                     FOUNDATION
                   </span>
-                  <span className="text-xs font-semibold text-[#F8FAFC]">
+                  <span className="text-xs font-semibold text-[#F8FAFC] group-hover:text-[#38BDF8] transition-colors">
                     GIAIC Quarter 4
                   </span>
                 </div>
@@ -331,7 +331,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 left-6 sm:left-8 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="interactive-card interactive-card-cyan absolute -top-3 left-6 sm:left-8 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC] cursor-default"
               >
                 <TypeScriptIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">TypeScript</span>
@@ -341,7 +341,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               <motion.div
                 animate={{ y: [0, 9, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute top-12 -right-2 sm:-right-4 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="interactive-card interactive-card-cyan absolute top-12 -right-2 sm:-right-4 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC] cursor-default"
               >
                 <NextJsIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">Next.js</span>
@@ -351,7 +351,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 right-8 sm:right-10 p-2.5 rounded-xl bg-[#101629]/90 border border-[#8B5CF6]/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="interactive-card interactive-card-violet absolute -bottom-4 right-8 sm:right-10 p-2.5 rounded-xl bg-[#101629]/90 border border-[#8B5CF6]/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC] cursor-default"
               >
                 <AgenticAiIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px] text-[#C4B5FD]">Agentic AI</span>
@@ -361,7 +361,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResume }) => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                className="absolute bottom-16 -left-3 sm:-left-6 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC]"
+                className="interactive-card interactive-card-cyan absolute bottom-16 -left-3 sm:-left-6 p-2.5 rounded-xl bg-[#101629]/90 border border-white/10 shadow-lg backdrop-blur-md flex items-center gap-2 text-xs font-medium text-[#F8FAFC] cursor-default"
               >
                 <PythonIcon className="w-5 h-5" />
                 <span className="font-mono text-[11px]">Python</span>

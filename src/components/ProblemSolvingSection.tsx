@@ -136,10 +136,10 @@ export const ProblemSolvingSection: React.FC = () => {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   onClick={() => setActiveStep(idx)}
-                  className={`relative flex items-start gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                  className={`group interactive-card interactive-card-violet relative flex items-start gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
                     isSelected
                       ? 'bg-[#101730] border-[#8B5CF6]/60 shadow-[0_0_30px_rgba(139,92,246,0.25)] pl-5 sm:pl-7'
-                      : 'bg-[#0D1224]/80 border-white/[0.06] hover:bg-[#10162B] hover:border-white/15'
+                      : 'bg-[#0D1224]/80 border-white/[0.06] hover:bg-[#10162B] hover:border-[#8B5CF6]/40 hover:shadow-[0_0_24px_rgba(139,92,246,0.18)]'
                   }`}
                 >
                   {/* Step Number Circle on the Line */}
@@ -147,7 +147,7 @@ export const ProblemSolvingSection: React.FC = () => {
                     className={`relative z-10 flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center font-display font-extrabold text-base sm:text-xl border-2 transition-all duration-300 ${
                       isSelected
                         ? 'bg-gradient-to-br from-[#8B5CF6] to-[#38BDF8] text-white border-white shadow-[0_0_20px_rgba(139,92,246,0.6)] scale-105'
-                        : 'bg-[#080B16] text-[#94A3B8] border-white/10 hover:border-[#8B5CF6]/50'
+                        : 'bg-[#080B16] text-[#94A3B8] border-white/10 group-hover:border-[#8B5CF6]/60 group-hover:text-white group-hover:scale-105'
                     }`}
                   >
                     {step.num}
@@ -157,17 +157,17 @@ export const ProblemSolvingSection: React.FC = () => {
                   <div className="flex-1 pt-1">
                     <div className="flex items-center gap-3 mb-1.5">
                       <div
-                        className="p-1.5 rounded-lg text-white"
+                        className="p-1.5 rounded-lg text-white group-hover:scale-110 transition-transform duration-300"
                         style={{ backgroundColor: `${step.accent}25` }}
                       >
                         <span style={{ color: step.accent }}>{step.icon}</span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-display font-bold text-[#F8FAFC] tracking-tight">
+                      <h3 className="text-lg sm:text-xl font-display font-bold text-[#F8FAFC] group-hover:text-[#38BDF8] transition-colors tracking-tight">
                         {step.title}
                       </h3>
                     </div>
 
-                    <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed max-w-2xl">
+                    <p className="text-sm sm:text-base text-[#94A3B8] group-hover:text-[#CBD5E1] transition-colors leading-relaxed max-w-2xl">
                       {step.desc}
                     </p>
                   </div>

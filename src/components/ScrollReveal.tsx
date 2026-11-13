@@ -31,8 +31,6 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
     xDistance,
     staggerDelay,
     duration,
-    viewportAmount,
-    viewportMargin,
     prefersReducedMotion,
   } = useViewportTier();
 
@@ -63,7 +61,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
     <motion.div
       initial={getInitialState()}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once, amount: viewportAmount, margin: viewportMargin }}
+      viewport={{ once, amount: 'some', margin: '0px' }}
       transition={{
         duration,
         delay: delay + index * staggerDelay,
